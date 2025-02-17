@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 public class Player : SingletonMonobehaviour<Player>, ISaveable
 {
 
-    //WaitForSeconds ÔİÍ£Ğ­³Ì Ò»¶ÎÊ±¼ä
+    //WaitForSeconds æš‚åœåç¨‹ ä¸€æ®µ
     private WaitForSeconds afterLiftToolAnimationPause;
     private WaitForSeconds afterUseToolAnimationPause;
     private WaitForSeconds afterPickAnimationPause;
@@ -63,7 +63,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
     private float movementSpeed;
 
     [Tooltip("Should be populated in the prefab with the equipped item spirte renderer")]
-    [SerializeField] private SpriteRenderer equippedItemSpriteRenderer = null; //¾ÍÊÇÍæ¼ÒÑ¡ÖĞÎïÆ·À¸ÖĞµÄÄ³¸öitem ºó£¬ĞèÒª¾ÙÆğÀ´µÄÄÇ¸öÎïÌåµÄ sprite 
+    [SerializeField] private SpriteRenderer equippedItemSpriteRenderer = null; //å°±æ˜¯ç©å®¶é€‰ä¸­ç‰©å“æ ä¸­çš„æŸä¸ªitem åï¼Œéœ€è¦ä¸¾èµ·æ¥çš„é‚£ä¸ªç‰©ä½“çš„ sprite 
 
     private CharacterAttribute armsCharacterAttribute;
     private CharacterAttribute toolCharacterAttribute;
@@ -71,7 +71,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
     private bool _playerInputIsDisabled = false;
     public bool PlayerInputIsDisabled { get => _playerInputIsDisabled; set => _playerInputIsDisabled = value; }
 
-    // Isaveable ½Ó¿ÚÒªÇóµÄÊôĞÔ
+    // Isaveable æ¥å£è¦æ±‚çš„å±æ€§
     private string _iSaveableUniqueID;
     public string ISaveableUniqueID { get { return _iSaveableUniqueID; } set { _iSaveableUniqueID = value; } }
 
@@ -88,26 +88,26 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
         animationOverrides = GetComponentInChildren<AnimationOverrides>();
 
-        armsCharacterAttribute = new CharacterAttribute(CharacterPartAnimator.arms , PartVariantColor.none , PartVarianType.none ); //ÊÖ²¿µÄ½ÇÉ«ÌØĞÔ£¬ºÍºóÃæµÄ¶¯»­¸²¸ÇÓĞ¹Ø
-        toolCharacterAttribute = new CharacterAttribute(CharacterPartAnimator.tool, PartVariantColor.none, PartVarianType.none); //ÊÖ²¿µÄ½ÇÉ«ÌØĞÔ£¬ºÍºóÃæµÄ¶¯»­¸²¸ÇÓĞ¹Ø
+        armsCharacterAttribute = new CharacterAttribute(CharacterPartAnimator.arms , PartVariantColor.none , PartVarianType.none ); //æ‰‹éƒ¨çš„è§’è‰²ç‰¹æ€§ï¼Œå’Œåé¢çš„åŠ¨ç”»è¦†ç›–æœ‰å…³
+        toolCharacterAttribute = new CharacterAttribute(CharacterPartAnimator.tool, PartVariantColor.none, PartVarianType.none); //æ‰‹éƒ¨çš„è§’è‰²ç‰¹æ€§ï¼Œå’Œåé¢çš„åŠ¨ç”»è¦†ç›–æœ‰å…³
 
 
         characterAttributeCustomisationList = new List<CharacterAttribute>();
 
-        //´Ó½Å±¾µÄ unique id Éú³ÉÆ÷ÉÏ,»ñÈ¡µ±Ç°½Å±¾µÄUnique ID
+        //ä»è„šæœ¬çš„ unique id ç”Ÿæˆå™¨ä¸Š,è·å–å½“å‰è„šæœ¬çš„Unique ID
 
         ISaveableUniqueID = GetComponent<GenerateGUID>().GUID;
         GameObjectSave = new GameObjectSave();
         
-        mainCamera =  Camera.main; //ÕâÀï»ñÈ¡µÄmian camera ±ØĞëÊÇ±êÇ©Îª maincamera µÄ camera 
+        mainCamera =  Camera.main; //è¿™é‡Œè·å–çš„mian camera å¿…é¡»æ˜¯æ ‡ç­¾ä¸º maincamera çš„ camera 
     }
 
     private void OnEnable()
     {
-        //×¢²á ±£´æ 
+        //æ³¨å†Œ ä¿å­˜ 
         ISaveable_Register();
 
-        //¾ÍÊÇ³¡¾°¹ı¶ÉÊ± Ó¦¸Ã¹Ø±Õ ÊäÈëºÍÒÆ¶¯ 
+        //å°±æ˜¯åœºæ™¯è¿‡æ¸¡æ—¶ åº”è¯¥å…³é—­ è¾“å…¥å’Œç§»åŠ¨ 
         EventHandler.BeforeSceneUnloadFadeOutEvent += DisablePlayerInputAndResetMovement;
         EventHandler.AfterSceneloadFadeInEvent += EnablePlayerInput;
 
@@ -129,7 +129,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         cursor = FindObjectOfType<Cursor>();    
 
 
-        //ÓÃ Settings ÖĞÉèÖÃºÃµÄÖµ Ìî³ä ÕâÀïµÄ Á½¸ö WaitForSeconds £¬ ÕâÀïÁ½¸öÔİÍ£ ÊÇÎªÁËÓÅ»¯ Ê¹ÓÃ ¹¤¾ßÊ± ¶¯»­ µÄÏÔÊ¾ Ğ§¹û 
+        //ç”¨ Settings ä¸­è®¾ç½®å¥½çš„å€¼ å¡«å…… è¿™é‡Œçš„ ä¸¤ä¸ª WaitForSeconds ï¼Œ è¿™é‡Œä¸¤ä¸ªæš‚åœ æ˜¯ä¸ºäº†ä¼˜åŒ– ä½¿ç”¨ å·¥å…·æ—¶ åŠ¨ç”» çš„æ˜¾ç¤º æ•ˆæœ 
         useToolAnimationPause = new WaitForSeconds(Settings.useToolAnimationPause);
         afterUseToolAnimationPause = new WaitForSeconds(Settings.afterUseToolAnimationPause);
         liftToolAnimationPause = new WaitForSeconds(Settings.liftToolAnimationPause);
@@ -150,11 +150,11 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
             PlayerMovementInput();
             PlayerWalkInput();
 
-            PlayerClickInput(); //¾ÍÊÇ²»ÍÏ¶¯£¬Ö±½ÓÑ¡ÖĞÈ»ºóµã»÷ ´¥·¢µÄÊÂ¼ş
+            PlayerClickInput(); //å°±æ˜¯ä¸æ‹–åŠ¨ï¼Œç›´æ¥é€‰ä¸­ç„¶åç‚¹å‡» è§¦å‘çš„äº‹ä»¶
 
             PlayerTestInput();
 
-            Debug.Log("À´×Ômac air µÄÔ¶³Ìµ÷ÊÔ");
+            Debug.Log("æ¥è‡ªmac air çš„è¿œç¨‹è°ƒè¯•");
             
             EventHandler.CallMovementEvent(_xInput, _yInput, toolEffect, isCarrying,
             isWalking, isRunning, isIdle,
@@ -191,7 +191,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
                 if (gridCursor.CursorIsEnable || cursor.CursorIsEnable)
                 {
-                    //»ñÈ¡ µ± ¹â±ê ºÍ Íæ¼Ò µÄÎ»ÖÃ£¬ 
+                    //è·å– å½“ å…‰æ ‡ å’Œ ç©å®¶ çš„ä½ç½®ï¼Œ 
                     Vector3Int cursorGridPosition = gridCursor.GetGridPositionForCursor();
                     Vector3Int PlayerGridPosition = gridCursor.GetGridPositionForPlayer();
                     ProcessPlayerClickInput(cursorGridPosition ,  PlayerGridPosition);
@@ -205,7 +205,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
     {
         ResetMovement();
 
-        // Íæ¼Ò Ó¦¸Ã ÃæÏò ¹â±êËùÔÚµÄ·½Ïò 
+        // ç©å®¶ åº”è¯¥ é¢å‘ å…‰æ ‡æ‰€åœ¨çš„æ–¹å‘ 
         Vector3Int playerDirection = GetPlayerClickDirection(cursorGridPosition, PlayerGridPosition);
         GridPropertyDetails gridPropertyDetails = GridPropertIesManager.Instance.GetGridPropertyDetails(cursorGridPosition.x, cursorGridPosition.y);
 
@@ -305,7 +305,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
     private void ProcessPlayerClickInputSeed( GridPropertyDetails gridPropertyDetails , ItemDetails itemDetails)
     {
-        //Èç¹ûµ±Ç° grid µÄ gridPropertyDetails ÏÔÊ¾ Õâ¸ö grid ±»ÍÚ¹ı ¶øÇÒÃ»ÓĞÖÖÏÂÖÖ×Ó 
+        //å¦‚æœå½“å‰ grid çš„ gridPropertyDetails æ˜¾ç¤º è¿™ä¸ª grid è¢«æŒ–è¿‡ è€Œä¸”æ²¡æœ‰ç§ä¸‹ç§å­ 
         if (itemDetails.canBeDropped && gridCursor.CursorPositionIsValid && gridPropertyDetails.daysSinceDug > -1 && gridPropertyDetails.seedItemCode == -1)
         {
             PlantSeedAtCursor(gridPropertyDetails , itemDetails );
@@ -396,7 +396,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
     private void ResetAnimationTriggers()
     {
-      //ÖØÖÃËùÒÔ¶¯»­µÄ×´Ì¬
+      //é‡ç½®æ‰€ä»¥åŠ¨ç”»çš„çŠ¶æ€
      toolEffect = ToolEffect.none;
      isUsingToolRight = false ;        
      isUsingToolLeft = false;
@@ -493,7 +493,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
             equippedItemSpriteRenderer.sprite = _itemDetails.itemSprite;
             equippedItemSpriteRenderer.color = new Color (1f,1f,1f, 1f);
 
-            //Ó¦ÓÃ carry Õâ¸öcustomisation  µ½ armsCharacterAttribute ÉÏ , ÈË»°¾ÍÊÇ°ÑÊÖ²¿µÄ¶¯»­ÊôĞÔ ÉèÖÃÎª carry ×´Ì¬
+            //åº”ç”¨ carry è¿™ä¸ªcustomisation  åˆ° armsCharacterAttribute ä¸Š , äººè¯å°±æ˜¯æŠŠæ‰‹éƒ¨çš„åŠ¨ç”»å±æ€§ è®¾ç½®ä¸º carry çŠ¶æ€
             armsCharacterAttribute.partVarianType = PartVarianType.carry;
             characterAttributeCustomisationList.Clear();
             characterAttributeCustomisationList.Add(armsCharacterAttribute);
@@ -588,7 +588,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
     }
 
 
-    ///Ê±¼äÏµÍ³²âÊÔ / ³¡¾°¼ÓÔØÏµÍ³²âÊÔ
+    ///æ—¶é—´ç³»ç»Ÿæµ‹è¯• / åœºæ™¯åŠ è½½ç³»ç»Ÿæµ‹è¯•
     private void PlayerTestInput()
     {
         if (Input.GetKeyDown(KeyCode.T))
@@ -601,9 +601,9 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
             TimeManager.Instance.Test_AdvanceGameDay();
         }
          
-        if (Input.GetMouseButtonDown(1)) //Êó±êÓÒ¼ü
+        if (Input.GetMouseButtonDown(1)) //é¼ æ ‡å³é”®
         {
-            ////´Ó¶ÔÏó³ØÖĞÈ¡³ö object ²¢·ÅÖÃÔÚ Êó±êËùÔÚµÄÎ»ÖÃÉÏ
+            ////ä»å¯¹è±¡æ± ä¸­å–å‡º object å¹¶æ”¾ç½®åœ¨ é¼ æ ‡æ‰€åœ¨çš„ä½ç½®ä¸Š
             //GameObject tree = PoolManager.Instance.ReuseObject(canyonOakTreePrefab , mainCamera.ScreenToWorldPoint(
             //    new Vector3(Input.mousePosition.x , Input.mousePosition.y , -mainCamera.transform.position.z)) , Quaternion.identity);
             //tree.SetActive(true);
@@ -643,7 +643,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         PlayerInputIsDisabled = true;
         playerToolUseDisabled = true;
 
-        //ÉèÖÃ Á­µ¶µÄ¶¯»­¸²¸Ç 
+        //è®¾ç½® é•°åˆ€çš„åŠ¨ç”»è¦†ç›– 
         toolCharacterAttribute.partVarianType = PartVarianType.scythe;
         characterAttributeCustomisationList.Clear();
         characterAttributeCustomisationList.Add(toolCharacterAttribute);
@@ -667,7 +667,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         PlayerInputIsDisabled = true;
         playerToolUseDisabled = true;
 
-        //ÉèÖÃ Ê®×Ö¸äµÄ¶¯»­¸²¸Ç 
+        //è®¾ç½® åå­—é•çš„åŠ¨ç”»è¦†ç›– 
         toolCharacterAttribute.partVarianType = PartVarianType.pickaxe;
         characterAttributeCustomisationList.Clear();
         characterAttributeCustomisationList.Add(toolCharacterAttribute);
@@ -689,7 +689,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         PlayerInputIsDisabled = true;
         playerToolUseDisabled = true;
 
-        //ÉèÖÃ¶¯»­¸²¸ÇÏà¹Ø²ÎÊı
+        //è®¾ç½®åŠ¨ç”»è¦†ç›–ç›¸å…³å‚æ•°
         toolCharacterAttribute.partVarianType = PartVarianType.wateringCan;
         characterAttributeCustomisationList.Clear();
         characterAttributeCustomisationList.Add(toolCharacterAttribute);
@@ -698,7 +698,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
         toolEffect = ToolEffect.watering;
 
-        //ÏÂÃæÉèÖÃµÄÕâĞ© ·½Ïò²ÎÊı »áËæ×Å update ÖĞ ¶Ô CallMovementEvent µÄµ÷ÓÃ £¬ ´«µİ¸ø ¶¯»­ Ïà¹ØµÄ Àà ½øĞĞ ¶¯»­µÄ´¦Àí 
+        //ä¸‹é¢è®¾ç½®çš„è¿™äº› æ–¹å‘å‚æ•° ä¼šéšç€ update ä¸­ å¯¹ CallMovementEvent çš„è°ƒç”¨ ï¼Œ ä¼ é€’ç»™ åŠ¨ç”» ç›¸å…³çš„ ç±» è¿›è¡Œ åŠ¨ç”»çš„å¤„ç† 
         if (playerDirection == Vector3Int.right)
         {
             isLiftingToolRight = true;
@@ -718,21 +718,21 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
 
 
-        yield return liftToolAnimationPause; // ÔİÍ£ startÊ±  useToolAnimationPause ÖĞ ÉèÖÃµÄÊ±¼ä 
+        yield return liftToolAnimationPause; // æš‚åœ startæ—¶  useToolAnimationPause ä¸­ è®¾ç½®çš„æ—¶é—´ 
 
-        // ½«¶ÔÓ¦µÄ grid ÉèÖÃÎª ±» ÍÚ¾ò¹ı µÄ ×´Ì¬ 
+        // å°†å¯¹åº”çš„ grid è®¾ç½®ä¸º è¢« æŒ–æ˜è¿‡ çš„ çŠ¶æ€ 
         if (gridPropertyDetails.daySinceWatered == -1)
         {
             gridPropertyDetails.daySinceWatered = 0;
         }
-        //ÉèÖÃ¶ÔÓ¦ grid µÄ×´Ì¬ 
+        //è®¾ç½®å¯¹åº” grid çš„çŠ¶æ€ 
         GridPropertIesManager.Instance.SetGridPropertyDetials(gridPropertyDetails.gridX, gridPropertyDetails.gridY, gridPropertyDetails);
         GridPropertIesManager.Instance.DisplayWaterGround(gridPropertyDetails);
        
 
         yield return afterLiftToolAnimationPause;
 
-        // »Ö¸´ Íæ¼Ò ÊäÈë ºÍ Ê¹ÓÃ¹¤¾ß 
+        // æ¢å¤ ç©å®¶ è¾“å…¥ å’Œ ä½¿ç”¨å·¥å…· 
         PlayerInputIsDisabled = false;
         playerToolUseDisabled = false;
     }
@@ -742,13 +742,13 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         PlayerInputIsDisabled = true;
         playerToolUseDisabled = true;
 
-        //ÉèÖÃ¶¯»­¸²¸ÇÏà¹Ø²ÎÊı
+        //è®¾ç½®åŠ¨ç”»è¦†ç›–ç›¸å…³å‚æ•°
         toolCharacterAttribute.partVarianType = PartVarianType.hoe;
         characterAttributeCustomisationList.Clear();
         characterAttributeCustomisationList.Add(toolCharacterAttribute);
         animationOverrides.ApplyCharacterCustomisationParameters(characterAttributeCustomisationList);
 
-        //ÏÂÃæÉèÖÃµÄÕâĞ© ·½Ïò²ÎÊı »áËæ×Å update ÖĞ ¶Ô CallMovementEvent µÄµ÷ÓÃ £¬ ´«µİ¸ø ¶¯»­ Ïà¹ØµÄ Àà ½øĞĞ ¶¯»­µÄ´¦Àí 
+        //ä¸‹é¢è®¾ç½®çš„è¿™äº› æ–¹å‘å‚æ•° ä¼šéšç€ update ä¸­ å¯¹ CallMovementEvent çš„è°ƒç”¨ ï¼Œ ä¼ é€’ç»™ åŠ¨ç”» ç›¸å…³çš„ ç±» è¿›è¡Œ åŠ¨ç”»çš„å¤„ç† 
         if (playerDirection == Vector3Int.right)
         {
             isUsingToolRight = true;
@@ -768,22 +768,22 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
 
 
-        yield return useToolAnimationPause; // ÔİÍ£ startÊ±  useToolAnimationPause ÖĞ ÉèÖÃµÄÊ±¼ä 
+        yield return useToolAnimationPause; // æš‚åœ startæ—¶  useToolAnimationPause ä¸­ è®¾ç½®çš„æ—¶é—´ 
 
-       // ½«¶ÔÓ¦µÄ grid ÉèÖÃÎª ±» ÍÚ¾ò¹ı µÄ ×´Ì¬ 
+       // å°†å¯¹åº”çš„ grid è®¾ç½®ä¸º è¢« æŒ–æ˜è¿‡ çš„ çŠ¶æ€ 
        if(gridPropertyDetails.daysSinceDug == -1)
         {
             gridPropertyDetails.daysSinceDug = 0;
         }
-       //ÉèÖÃ¶ÔÓ¦ grid µÄ×´Ì¬ 
+       //è®¾ç½®å¯¹åº” grid çš„çŠ¶æ€ 
         GridPropertIesManager.Instance.SetGridPropertyDetials(gridPropertyDetails.gridX, gridPropertyDetails.gridY, gridPropertyDetails);
 
-        //½«¶ÔÓ¦ grid ÉÏÏÔÊ¾ µÄ sprite Ìæ»» 
+        //å°†å¯¹åº” grid ä¸Šæ˜¾ç¤º çš„ sprite æ›¿æ¢ 
         GridPropertIesManager.Instance.DisplayDugGround(gridPropertyDetails);
 
         yield return afterUseToolAnimationPause;
 
-        // »Ö¸´ Íæ¼Ò ÊäÈë ºÍ Ê¹ÓÃ¹¤¾ß 
+        // æ¢å¤ ç©å®¶ è¾“å…¥ å’Œ ä½¿ç”¨å·¥å…· 
         PlayerInputIsDisabled = false;
         playerToolUseDisabled = false;
     }
@@ -830,7 +830,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
     public Vector3 GetPlayerViewportPosition()
     {
-        //·µ»ØÍæ¼ÒÔÚÊÔÍ¼ÖĞµÄÎ»ÖÃ£¨ÕâÀï 00 ÊÇ×óÏÂ½Ç 11 ÊÇÓÒÉÏ½Ç£©
+        //è¿”å›ç©å®¶åœ¨è¯•å›¾ä¸­çš„ä½ç½®ï¼ˆè¿™é‡Œ 00 æ˜¯å·¦ä¸‹è§’ 11 æ˜¯å³ä¸Šè§’ï¼‰
         return mainCamera.WorldToViewportPoint(transform.position);
     }
 
@@ -847,7 +847,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         {
             switch (equippeditemDetails.itemType)
             {
-                //¸ù¾İÍæ¼Ò·½Ïò£¬ÉèÖÃ isSwingingTool µÄ·½Ïò
+                //æ ¹æ®ç©å®¶æ–¹å‘ï¼Œè®¾ç½® isSwingingTool çš„æ–¹å‘
                 case ItemType.Reaping_tool:
                     if (playerDirection == Vector3Int.right)
                     {
@@ -880,24 +880,24 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
             int reapableItemCount = 0;
 
-            //±éÀúÊÕ¼¯µ½µÄ itemArray Èç¹ûÓĞ Reapable_scenary ¾Í´İ»ÙËü
+            //éå†æ”¶é›†åˆ°çš„ itemArray å¦‚æœæœ‰ Reapable_scenary å°±æ‘§æ¯å®ƒ
             for (int i = itemArray.Length - 1; i >= 0; i--)
             {
                 if (itemArray[i] != null)
                 {
                     if (InventoryManager.Instance.GetItemDetails(itemArray[i].ItemCode).itemType == ItemType.Reapable_scenary)
                     {
-                        // ÌØĞ§µÄÎ»ÖÃ 
+                        // ç‰¹æ•ˆçš„ä½ç½® 
                         Vector3 effectPosition = new Vector3(itemArray[i].transform.position.x, itemArray[i].transform.position.y + Settings.gridCellSize / 2f
                             , itemArray[i].transform.position.z);
 
-                        //´¥·¢ÌØĞ§ 
+                        //è§¦å‘ç‰¹æ•ˆ 
                         EventHandler.CallHarvestActionEffectEvent(effectPosition, HarvestActionEffect.reaping);
 
                         Destroy(itemArray[i].gameObject);
 
                         reapableItemCount++;
-                        //³¬³ö×î´ó¿ÉÒÔ ¸îµô£¨·¶Î§£© µÄÊıÄ¿ ¾ÍÇ¿ÖÆ·µ»Ø
+                        //è¶…å‡ºæœ€å¤§å¯ä»¥ å‰²æ‰ï¼ˆèŒƒå›´ï¼‰ çš„æ•°ç›® å°±å¼ºåˆ¶è¿”å›
                         if(reapableItemCount >= Settings.maxTargetComponentsToDestroyPerReapSwing)
                             break;
                     }
@@ -909,28 +909,28 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
     public GameObjectSave ISaveableSave()
     {
-        //Èç¹ûÒÑ¾­×¼±¸ ÍË³ö ¾ÍÇå³ı µ±Ç° ÓÎÏ·µÄ savescene
+        //å¦‚æœå·²ç»å‡†å¤‡ é€€å‡º å°±æ¸…é™¤ å½“å‰ æ¸¸æˆçš„ savescene
         GameObjectSave.sceneData.Remove(Settings.PersistentScene);
-        //ÎªÓÎÏ·¶ÔÏó½¨Á¢ĞÂµÄ game object
+        //ä¸ºæ¸¸æˆå¯¹è±¡å»ºç«‹æ–°çš„ game object
         SceneSave sceneSave = new SceneSave();
 
-        //½¨Á¢v3 ×Öµä
+        //å»ºç«‹v3 å­—å…¸
         sceneSave.vector3Dictionary = new Dictionary<string, Vector3Serializable>();
 
-        //½¨Á¢string (Êı¾İÀàĞÍ ,µ±Ç°³¡¾°Ãû×Ö)
+        //å»ºç«‹string (æ•°æ®ç±»å‹ ,å½“å‰åœºæ™¯åå­—)
         sceneSave.stringDictionary = new Dictionary<string, string>();
 
-        //½«Íæ¼ÒÎ»ÖÃ¼ÓÈëµ½ v3 µÄ×ÖµäÖĞ
+        //å°†ç©å®¶ä½ç½®åŠ å…¥åˆ° v3 çš„å­—å…¸ä¸­
         Vector3Serializable vector3Serializable = new Vector3Serializable(transform.position.x,transform.position.y,transform.position.z);
         sceneSave.vector3Dictionary.Add("PlayerPosition",vector3Serializable);
 
-        //Ìí¼Óµ±Ç°³¡¾°Ãû×Ö µ½ string ×Öµä
+        //æ·»åŠ å½“å‰åœºæ™¯åå­— åˆ° string å­—å…¸
         sceneSave.stringDictionary.Add("CurrentScene", SceneManager.GetActiveScene().name);
 
-        // Ìí¼ÓÍæ¼ÒµÄ·½Ïòµ½ string ×Öµä , playerDirection ÊÇÒ»¸öÃ¶¾Ù , Ö±½Ó¸Ä±ä ½ÇÉ«¶¯»­ÏÔÊ¾,²»ÊÇÏòÁ¿
+        // æ·»åŠ ç©å®¶çš„æ–¹å‘åˆ° string å­—å…¸ , playerDirection æ˜¯ä¸€ä¸ªæšä¸¾ , ç›´æ¥æ”¹å˜ è§’è‰²åŠ¨ç”»æ˜¾ç¤º,ä¸æ˜¯å‘é‡
         sceneSave.stringDictionary.Add("playerDirection",playerDirection.ToString());   
 
-        // Ìí¼Ó³¡¾° save Êı¾İ 
+        // æ·»åŠ åœºæ™¯ save æ•°æ® 
         GameObjectSave.sceneData.Add(Settings.PersistentScene, sceneSave);
 
         return GameObjectSave;
@@ -951,12 +951,12 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
                 if (sceneSave.stringDictionary != null)
                 {
-                    //»ñÈ¡Íæ¼ÒËùÔÚ³¡¾°
+                    //è·å–ç©å®¶æ‰€åœ¨åœºæ™¯
                     if (sceneSave.stringDictionary.TryGetValue("CurrentScene", out string currentScene))
                     {
                         SceneControllerManager.Instance.FadeAndLoadScene(currentScene, transform.position);
                     }
-                    //»ñÈ¡Íæ¼Ò·½Ïò
+                    //è·å–ç©å®¶æ–¹å‘
                     if(sceneSave.stringDictionary.TryGetValue("playerDirection",out string playerDir))
                     {
                         bool playerDirFound = Enum.TryParse<Direction>(playerDir, true,out Direction direction);
