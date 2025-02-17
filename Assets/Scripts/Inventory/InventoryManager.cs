@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class InventoryManager : SingletonMonobehaviour<InventoryManager> , ISaveable
 {
+    //
 
     private UIInventoryBar InventoryBar;
     private static InventoryManager instance;

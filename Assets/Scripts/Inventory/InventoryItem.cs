@@ -1,4 +1,4 @@
-[System.Serializable] // ©ипРап╩╞(©ирт╠ё╢Фё╘
+[System.Serializable] // Е▐╞Е╨▐Е┬≈Е▄√(Е▐╞Д╩╔Д©²Е╜≤О╪┴
 
 public struct InventoryItem
 {

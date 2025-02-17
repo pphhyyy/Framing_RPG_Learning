@@ -1,19 +1,19 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary; //½«ÔËĞĞµÄÊı¾İÎÄ¼ş×ªÎª ¶ş½øÖÆÎÄ¼şÒÔ±£´æ
+using System.Runtime.Serialization.Formatters.Binary; //å°†è¿è¡Œçš„æ•°æ®æ–‡ä»¶è½¬ä¸º äºŒè¿›åˆ¶æ–‡ä»¶ä»¥ä¿å­˜
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SaveLoadManager : SingletonMonobehaviour <SaveLoadManager>
 {
-    public GameSave gameSave; //ÓÃÀ´±£´æÓÎÏ·Êı¾İ
+    public GameSave gameSave; //ç”¨æ¥ä¿å­˜æ¸¸æˆæ•°æ®
 
-    // ÕâÀïÔÚÁĞ±íÖĞ×°ÈëµÄÊÇ½Ó¿Ú¶ø·Ç¾ßÌåµÄÀà£¬ÕâÑùĞ´£¬Ö»ÒªÊÇ¼Ì³ĞÁË ISaveable µÄÀà¶¼¿ÉÒÔ×°ÈëÕâ¸ölist£¬Ò²¾ÍÊÇ¿ÉÒÔ×°Èë²»Í¬ÀàĞÍµÄÀà
-    //±ÈÈçÍæ¼ÒÊı¾İµÄ´æ´¢ºÍ³¡¾°Êı¾İ´æ´¢µÄ¾ßÌå·½Ê½ÊÇ²»Ò»ÑùµÄ£¬µ«Ö»ÒªÁ½Õß¶¼¼Ì³ĞÁËISaveable ½Ó¿Ú£¬¾Í¿ÉÒÔÔÚÏÂÃæµ÷ÓÃ½Ó¿Ú·½·¨µÄÊ±ºò¸ù¾İ¸÷×ÔÀàÖĞÊµÏÖµÄ·½·¨ ·Ö±ğ½øĞĞ ´æ´¢¹¤×÷
+    // è¿™é‡Œåœ¨åˆ—è¡¨ä¸­è£…å…¥çš„æ˜¯æ¥å£è€Œéå…·ä½“çš„ç±»ï¼Œè¿™æ ·å†™ï¼Œåªè¦æ˜¯ç»§æ‰¿äº† ISaveable çš„ç±»éƒ½å¯ä»¥è£…å…¥è¿™ä¸ªlistï¼Œä¹Ÿå°±æ˜¯å¯ä»¥è£…å…¥ä¸åŒç±»å‹çš„ç±»
+    //æ¯”å¦‚ç©å®¶æ•°æ®çš„å­˜å‚¨å’Œåœºæ™¯æ•°æ®å­˜å‚¨çš„å…·ä½“æ–¹å¼æ˜¯ä¸ä¸€æ ·çš„ï¼Œä½†åªè¦ä¸¤è€…éƒ½ç»§æ‰¿äº†ISaveable æ¥å£ï¼Œå°±å¯ä»¥åœ¨ä¸‹é¢è°ƒç”¨æ¥å£æ–¹æ³•çš„æ—¶å€™æ ¹æ®å„è‡ªç±»ä¸­å®ç°çš„æ–¹æ³• åˆ†åˆ«è¿›è¡Œ å­˜å‚¨å·¥ä½œ
     public List<ISaveable> iSaveableObjectList;
 
-    //Õâ¸öÀàÊÇµ¥ÀıÀà£¬ ¶øiSaveableObjectList ¶øÊÇpublic £¬ËùÒÔÈÎºÎÀà¶¼¿ÉÒÔµ÷ÓÃÕâÀïµÄiSaveableObjectList £¬ °Ñ×Ô¼º×°½øÈ¥
+    //è¿™ä¸ªç±»æ˜¯å•ä¾‹ç±»ï¼Œ è€ŒiSaveableObjectList è€Œæ˜¯public ï¼Œæ‰€ä»¥ä»»ä½•ç±»éƒ½å¯ä»¥è°ƒç”¨è¿™é‡Œçš„iSaveableObjectList ï¼Œ æŠŠè‡ªå·±è£…è¿›å»
 
     protected override void Awake()
     {
@@ -30,9 +30,9 @@ public class SaveLoadManager : SingletonMonobehaviour <SaveLoadManager>
             gameSave = new GameSave();
 
             FileStream file = File.Open(Application.persistentDataPath + "/wildHopeCreek.dat", FileMode.Open);
-            gameSave = (GameSave)bf.Deserialize(file); // ·´ĞòÁĞ»¯»ñµÃ gameSave
+            gameSave = (GameSave)bf.Deserialize(file); // ååºåˆ—åŒ–è·å¾— gameSave
 
-            // ±éÀúËùÓĞ¼Ì³ĞÁË Isaveable ½Ó¿ÚµÄ ¶ÔÏó , ²¢ Ó¦ÓÃËûÃÇ save data
+            // éå†æ‰€æœ‰ç»§æ‰¿äº† Isaveable æ¥å£çš„ å¯¹è±¡ , å¹¶ åº”ç”¨ä»–ä»¬ save data
 
             for (int i =  iSaveableObjectList.Count - 1; i > -1 ; i--)
             {
@@ -40,7 +40,7 @@ public class SaveLoadManager : SingletonMonobehaviour <SaveLoadManager>
                 {
                     iSaveableObjectList[i].ISaveableLoad(gameSave);
                 }
-                // Èç¹û IsaveableObject µÄ unique ID ²»ÔÚÓÎÏ·µÄÊı¾İÖĞ , ¾Í´İ»ÙËûÃÇ
+                // å¦‚æœ IsaveableObject çš„ unique ID ä¸åœ¨æ¸¸æˆçš„æ•°æ®ä¸­ , å°±æ‘§æ¯ä»–ä»¬
                 else
                 {
                     Component component = (Component)iSaveableObjectList[i];
@@ -59,7 +59,7 @@ public class SaveLoadManager : SingletonMonobehaviour <SaveLoadManager>
     {
         gameSave = new GameSave();
 
-        // ±éÀúËùÓĞ¼Ì³ĞÁË ISaveable ½Ó¿ÚµÄ ÎïÌå,Íê³ÉËûÃÇµÄÊı¾İ±£´æ
+        // éå†æ‰€æœ‰ç»§æ‰¿äº† ISaveable æ¥å£çš„ ç‰©ä½“,å®Œæˆä»–ä»¬çš„æ•°æ®ä¿å­˜
 
         foreach(ISaveable iSaveableObject in iSaveableObjectList)
         {

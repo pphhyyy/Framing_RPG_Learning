@@ -2,21 +2,21 @@ using System.Collections.Generic;
 [System.Serializable]
 public class SceneSave 
 {
-    //´æ·ÅÕûĞÎÊı¾İµÄÊı×é£¬ÕâÀïÊÇÓÃÀ´±£´æÊ±¼äÏµÍ³µÄÊ±¼äÊı¾İµÄ¡£
+    //å­˜æ”¾æ•´å½¢æ•°æ®çš„æ•°ç»„ï¼Œè¿™é‡Œæ˜¯ç”¨æ¥ä¿å­˜æ—¶é—´ç³»ç»Ÿçš„æ—¶é—´æ•°æ®çš„ã€‚
     public Dictionary<string,int> intDictionary;
 
-    public Dictionary<string, bool> boolDictionary; // ×Ö·û´®µÄ¼ü£¬ ÓÃÓÚ±êÊ¶ÎÒÃÇÊÇ·ñÑ¡ÔñÁËÕâ¸ö list £¬ÊÇ·ñÊÇµÚÒ»´Î¼ÓÔØ 
-    //Ò»¸öÍ¨¹ı string  À´Ë÷ÒıµÄ  List<SceneItem> µÄµä£¬ Ã¿¸ölist¼ÇÂ¼±íÊ¾ Ò»Àà item µÄ position ,
-    //ÒòÎªÕâÀïÃ¿¸ö³¡¾° Ö»ÓĞ Ò»¸ö so list ËùÒÔÃ»ÓĞ±ØÒªÓÃ string À´Ë÷Òı list ÕâÀï¸Ä³É list ¾ÍºÃ
+    public Dictionary<string, bool> boolDictionary; // å­—ç¬¦ä¸²çš„é”®ï¼Œ ç”¨äºæ ‡è¯†æˆ‘ä»¬æ˜¯å¦é€‰æ‹©äº†è¿™ä¸ª list ï¼Œæ˜¯å¦æ˜¯ç¬¬ä¸€æ¬¡åŠ è½½ 
+    //ä¸€ä¸ªé€šè¿‡ string  æ¥ç´¢å¼•çš„  List<SceneItem> çš„å…¸ï¼Œ æ¯ä¸ªlistè®°å½•è¡¨ç¤º ä¸€ç±» item çš„ position ,
+    //å› ä¸ºè¿™é‡Œæ¯ä¸ªåœºæ™¯ åªæœ‰ ä¸€ä¸ª so list æ‰€ä»¥æ²¡æœ‰å¿…è¦ç”¨ string æ¥ç´¢å¼• list è¿™é‡Œæ”¹æˆ list å°±å¥½
     public List<SceneItem > listSceneItem; 
     public Dictionary<string, GridPropertyDetails> gridPropertyDetailsDictionary;
     
     public Dictionary<string, int[]> intArrayDictionary;
 
-    //±£´æÍæ¼ÒµÄÎ»ÖÃ(°üÀ¨³¡¾° Î»ÖÃ ÃæÏò)
+    //ä¿å­˜ç©å®¶çš„ä½ç½®(åŒ…æ‹¬åœºæ™¯ ä½ç½® é¢å‘)
     public Dictionary<string,string> stringDictionary;
     public Dictionary<string,Vector3Serializable> vector3Dictionary;
 
-    // ±£´æ/¼ÓÔØ Ê±ºò,´æ´¢Íæ¼Òµ±Ç° InventoryItem µÄÊı¾İ 
+    // ä¿å­˜/åŠ è½½ æ—¶å€™,å­˜å‚¨ç©å®¶å½“å‰ InventoryItem çš„æ•°æ® 
     public List<InventoryItem>[] listInvItemArray;
 }
