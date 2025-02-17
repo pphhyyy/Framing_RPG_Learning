@@ -128,7 +128,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
         gridCursor = FindObjectOfType<GridCursor>();
         cursor = FindObjectOfType<Cursor>();    
 
-
+        Debug.Log("来自mac air 的远程调试");
         //用 Settings 中设置好的值 填充 这里的 两个 WaitForSeconds ， 这里两个暂停 是为了优化 使用 工具时 动画 的显示 效果 
         useToolAnimationPause = new WaitForSeconds(Settings.useToolAnimationPause);
         afterUseToolAnimationPause = new WaitForSeconds(Settings.afterUseToolAnimationPause);
@@ -154,7 +154,7 @@ public class Player : SingletonMonobehaviour<Player>, ISaveable
 
             PlayerTestInput();
 
-            Debug.Log("来自mac air 的远程调试");
+            
             
             EventHandler.CallMovementEvent(_xInput, _yInput, toolEffect, isCarrying,
             isWalking, isRunning, isIdle,

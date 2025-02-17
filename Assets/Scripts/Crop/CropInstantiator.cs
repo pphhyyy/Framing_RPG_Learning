@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// ¸½¼ÓÔÚ crop Ô¤ÉèÌåÖĞ ÒÔÉèÖÃ grid ÊôĞÔ ×ÖµäµÄÊıÖµ
+/// é™„åŠ åœ¨ crop é¢„è®¾ä½“ä¸­ ä»¥è®¾ç½® grid å±æ€§ å­—å…¸çš„æ•°å€¼
 /// </summary>
 public class CropInstantiator : MonoBehaviour
 {
@@ -27,17 +27,17 @@ public class CropInstantiator : MonoBehaviour
 
     private void InstantiateCropPrefabs()
     {
-        Debug.Log("³õÊ¼»¯³¡¾°ÖĞÒÑÓĞµÄcrop £¡");
-        //´Óµ±Ç°¹ÒÔØµÄÎïÌåÉÏ »ñÈ¡ grid ¶ÔÏó
+        Debug.Log("åˆå§‹åŒ–åœºæ™¯ä¸­å·²æœ‰çš„crop ï¼");
+        //ä»å½“å‰æŒ‚è½½çš„ç‰©ä½“ä¸Š è·å– grid å¯¹è±¡
         grid = GameObject.FindObjectOfType<Grid>();
 
-        //´Óµ±Ç°µÄcrop ÉÏ »ñÈ¡ grid µÄ Î»ÖÃ 
+        //ä»å½“å‰çš„crop ä¸Š è·å– grid çš„ ä½ç½® 
         Vector3Int cropGridPosition = grid.WorldToCell(transform.position);
 
-        //ÉèÖÃ crop grid µÄÊôĞÔ 
+        //è®¾ç½® crop grid çš„å±æ€§ 
         SetCropGridProperties(cropGridPosition);
 
-        //ÒòÎªÊÇ ³õÊ¼»¯Æ÷£¨intantiator) ËùÒÔÉèÖÃÍê ÊôĞÔÒÔºó ¾Í¿ÉÒÔÏú»ÙÕâ¸ö ÓÎÏ·¶ÔÏóÁË
+        //å› ä¸ºæ˜¯ åˆå§‹åŒ–å™¨ï¼ˆintantiator) æ‰€ä»¥è®¾ç½®å®Œ å±æ€§ä»¥å å°±å¯ä»¥é”€æ¯è¿™ä¸ª æ¸¸æˆå¯¹è±¡äº†
         Destroy(gameObject);
     }
 
@@ -45,23 +45,23 @@ public class CropInstantiator : MonoBehaviour
     {
         GridPropertyDetails gridPropertyDetails;
 
-        //´Óµ±Ç° cropgrid ×ø±ê »ñÈ¡ grid µÄÊôĞÔÏ¸½Ú
+        //ä»å½“å‰ cropgrid åæ ‡ è·å– grid çš„å±æ€§ç»†èŠ‚
         gridPropertyDetails = GridPropertIesManager.Instance.GetGridPropertyDetails(cropGridPosition.x, cropGridPosition.y);
 
-        if (gridPropertyDetails == null) // Èç¹ûµ±Ç°µÄ cropGridPosition ÖĞÃ»ÓĞÕÒµ½ gridPropertyDetails ¾Í×Ô¼ºÊµÀı»¯Ò»¸ö 
+        if (gridPropertyDetails == null) // å¦‚æœå½“å‰çš„ cropGridPosition ä¸­æ²¡æœ‰æ‰¾åˆ° gridPropertyDetails å°±è‡ªå·±å®ä¾‹åŒ–ä¸€ä¸ª 
         {
             Debug.Log("debug");
             gridPropertyDetails = new GridPropertyDetails();
         }
         
-        // ½« CropInstantiator ÖĞÉèÖÃµÄ gridPropertyDetails
-        // ¸³Öµ¸ø ÎÒÃÇ´Ó GridPropertIesManager ÖĞ£¬Í¨¹ı grid ×ø±ê»ñµÃµÄ gridPropertyDetails
+        // å°† CropInstantiator ä¸­è®¾ç½®çš„ gridPropertyDetails
+        // èµ‹å€¼ç»™ æˆ‘ä»¬ä» GridPropertIesManager ä¸­ï¼Œé€šè¿‡ grid åæ ‡è·å¾—çš„ gridPropertyDetails
         gridPropertyDetails.daysSinceDug = daysSinceDug;
         gridPropertyDetails.daySinceWatered = daysSinceWatered;
         gridPropertyDetails.seedItemCode = seedItemCode;
         gridPropertyDetails.growthDays = growthDays;
 
-        //½« cropgrid µÄ¸÷Ïî²ÎÊı »Ø´«¸ø GridPropertIesManager £¬ÕâÒ»²½×öÍê£¬³õÊ¼»¯¾ÍÍê³ÉÁË 
+        //å°† cropgrid çš„å„é¡¹å‚æ•° å›ä¼ ç»™ GridPropertIesManager ï¼Œè¿™ä¸€æ­¥åšå®Œï¼Œåˆå§‹åŒ–å°±å®Œæˆäº† 
         GridPropertIesManager.Instance.SetGridPropertyDetials(cropGridPosition.x,cropGridPosition.y , gridPropertyDetails);
 
     }

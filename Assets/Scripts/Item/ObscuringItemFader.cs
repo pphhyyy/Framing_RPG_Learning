@@ -14,7 +14,7 @@ public class ObscuringItemFader : MonoBehaviour
     
     public void FadeOut()
     {
-        StartCoroutine(FadeOutRoutine());//¿ªÆôµ­³öĞ¯³Ì£¬ÈÃÎïÌåµÄÍ¸Ã÷¶È¼õÉÙ£¬Í¬Ê±²»Ó°ÏìÖ÷Ïß³ÌµÄÔËĞĞ
+        StartCoroutine(FadeOutRoutine());//å¼€å¯æ·¡å‡ºæºç¨‹ï¼Œè®©ç‰©ä½“çš„é€æ˜åº¦å‡å°‘ï¼ŒåŒæ—¶ä¸å½±å“ä¸»çº¿ç¨‹çš„è¿è¡Œ
     }
 
     public void FadeIn()
@@ -29,7 +29,7 @@ public class ObscuringItemFader : MonoBehaviour
         float cur_A = SpriteRenderer.color.a;
         float distance = 1f - cur_A;
 
-        while (1f - cur_A > 0.01f) // ÈÃcur_A ²Ù×Å 1 ±Æ½ü£¬ÊµÏÖµ­ÈëµÄĞ§¹û
+        while (1f - cur_A > 0.01f) // è®©cur_A æ“ç€ 1 é€¼è¿‘ï¼Œå®ç°æ·¡å…¥çš„æ•ˆæœ
         {
             cur_A = cur_A + distance / Settings.targetAlpha * Time.deltaTime;
             SpriteRenderer.color = new Color(1f, 1f, 1f, cur_A);
@@ -43,7 +43,7 @@ public class ObscuringItemFader : MonoBehaviour
         float cur_A = SpriteRenderer.color.a;
         float distance = cur_A - Settings.targetAlpha;
 
-        while(cur_A- Settings.targetAlpha > 0.01f) // ÈÃcur_A ²Ù×Å Settings.targetAlpha±Æ½ü£¬ÊµÏÖµ­³öµÄĞ§¹û
+        while(cur_A- Settings.targetAlpha > 0.01f) // è®©cur_A æ“ç€ Settings.targetAlphaé€¼è¿‘ï¼Œå®ç°æ·¡å‡ºçš„æ•ˆæœ
         {
             cur_A = cur_A - distance/ Settings.targetAlpha * Time.deltaTime;
             SpriteRenderer.color = new Color(1f, 1f, 1f, cur_A);

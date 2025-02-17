@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeManager : SingletonMonobehaviour<TimeManager>,ISaveable
+public class TimeManager : SingletonMonobehaviour<TimeManager>
 {
 
-    // git ¸ü¸Ä²âÊÔ 
-    //¶¨Òå¸÷ÖÖÊ±¼ä²ÎÊı
+    // git æ›´æ”¹æµ‹è¯• 
+    //å®šä¹‰å„ç§æ—¶é—´å‚æ•°
     private int gamerYear = 1;
     private Season gameSeason = Season.Spring;
     private int gameDay = 1;
@@ -14,7 +14,7 @@ public class TimeManager : SingletonMonobehaviour<TimeManager>,ISaveable
     private int gameMinute = 30;
     private int gameSecond = 0;
     private string gameDayOfWeek = "Mon";
-    private bool gameClockPaused = false; //µ±Ç°Ê±¼äÊÇ·ñÔİÍ£
+    private bool gameClockPaused = false; //å½“å‰æ—¶é—´æ˜¯å¦æš‚åœ
     private float gameTick = 0f;
 
      private string _iSaveableUniqueID;
@@ -46,7 +46,7 @@ public class TimeManager : SingletonMonobehaviour<TimeManager>,ISaveable
     {
         if(!gameClockPaused)
         {
-            GameTick(); // ¿ªÊ¼×ª¶¯¼ÆÊ±
+            GameTick(); // å¼€å§‹è½¬åŠ¨è®¡æ—¶
         }
     }
 
@@ -54,7 +54,7 @@ public class TimeManager : SingletonMonobehaviour<TimeManager>,ISaveable
     {
         gameTick += Time.deltaTime;
 
-        if(gameTick >= Settings.secondsPerGameSecond) // ´óÓÚÒ»Ãë£¬¾ÍÈÃÃëÕë¿ªÊ¼×ª¶¯
+        if(gameTick >= Settings.secondsPerGameSecond) // å¤§äºä¸€ç§’ï¼Œå°±è®©ç§’é’ˆå¼€å§‹è½¬åŠ¨
         {
             gameTick -= Settings.secondsPerGameSecond;
 
@@ -81,7 +81,7 @@ public class TimeManager : SingletonMonobehaviour<TimeManager>,ISaveable
                     if(gameDay > 30)
                     {
                         gameDay = 1;
-                        //ÕâÀïseason ÊÇÓÃÃ¶¾ÙÀ´¼ÇÂ¼µÄ£¬ÓÎÏ·ÀïÃæÒ»¸öÔÂ¾ÍÖ±½Ó»»¼¾½ÚÁË £¬ È»ºó»»¼¾½ÚµÄÊ±ºòÓÃÖĞ¼ä ±äÁ¿ À´Ôö¼Ó¼¾½Ú
+                        //è¿™é‡Œseason æ˜¯ç”¨æšä¸¾æ¥è®°å½•çš„ï¼Œæ¸¸æˆé‡Œé¢ä¸€ä¸ªæœˆå°±ç›´æ¥æ¢å­£èŠ‚äº† ï¼Œ ç„¶åæ¢å­£èŠ‚çš„æ—¶å€™ç”¨ä¸­é—´ å˜é‡ æ¥å¢åŠ å­£èŠ‚
                         int gs = (int)gameSeason;
                         gs++;
                         gameSeason = (Season)gs;
@@ -108,12 +108,12 @@ public class TimeManager : SingletonMonobehaviour<TimeManager>,ISaveable
 
             EventHandler.CallAdvanceGameMinuteEvent(gamerYear, gameSeason, gameDay, gameDayOfWeek, gameHour, gameMinute, gameSecond);
 
-           // Debug.Log("Äê:" + gamerYear + " ¼¾½Ú :" + gameSeason + "  ÈÕ :" + gameDay + " Ğ¡Ê± :" + gameHour + " ·Ö:" + gameMinute + "  Ãë:" + gameSecond);
+           // Debug.Log("å¹´:" + gamerYear + " å­£èŠ‚ :" + gameSeason + "  æ—¥ :" + gameDay + " å°æ—¶ :" + gameHour + " åˆ†:" + gameMinute + "  ç§’:" + gameSecond);
         }
     }
 
     private string GetDayOfWeek()
-    {   //¼ÆËãµ±Ç°ÊÇĞÇÆÚ¼¸
+    {   //è®¡ç®—å½“å‰æ˜¯æ˜ŸæœŸå‡ 
         int TotalDays = (((int)gameSeason) * 30) + gameDay ;
         int dayOfWeek = TotalDays % 7 + 1;
 

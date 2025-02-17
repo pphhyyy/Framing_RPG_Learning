@@ -12,7 +12,7 @@ public class InventoryManager : SingletonMonobehaviour<InventoryManager> , ISave
     private static InventoryManager instance;
     private Dictionary<int, ItemDetails> itemDetailsDictionary;
 
-    private int[] selectedInventoryItem;  // ±»Ñ¡ÖĞµÄ´æ»õÁĞ±íµÄË÷Òı
+    private int[] selectedInventoryItem;  // è¢«é€‰ä¸­çš„å­˜è´§åˆ—è¡¨çš„ç´¢å¼•
 
     public List<InventoryItem> [] InventoryLists;
 
@@ -40,7 +40,7 @@ public class InventoryManager : SingletonMonobehaviour<InventoryManager> , ISave
         selectedInventoryItem = new int[(int)InventoryLocation.count];
         for(int i = 0; i < selectedInventoryItem.Length; i++)
         {
-            selectedInventoryItem[i] = -1;  // awake Ê±³õÊ¼»¯£¬´ú±íÄ¿Ç°Ã»ÓĞÑ¡ÖĞÈÎºÎÒ»¸öInventoryItem 
+            selectedInventoryItem[i] = -1;  // awake æ—¶åˆå§‹åŒ–ï¼Œä»£è¡¨ç›®å‰æ²¡æœ‰é€‰ä¸­ä»»ä½•ä¸€ä¸ªInventoryItem 
         }
 
         ISaveableUniqueID = GetComponent<GenerateGUID>().GUID;
@@ -66,20 +66,20 @@ public class InventoryManager : SingletonMonobehaviour<InventoryManager> , ISave
     private void CreatInventoryList()
     {
         InventoryLists = new List<InventoryItem>[(int)InventoryLocation.count];
-        //´ÓInventoryLocation.count µÃÖªĞèÒª´´½¨¼¸¸ö InventoryList £¨ÕâÀïÊÇÁ½¸ö Ò»¸ö Íæ¼Ò Ò»¸ö Ïä×Ó£©
+        //ä»InventoryLocation.count å¾—çŸ¥éœ€è¦åˆ›å»ºå‡ ä¸ª InventoryList ï¼ˆè¿™é‡Œæ˜¯ä¸¤ä¸ª ä¸€ä¸ª ç©å®¶ ä¸€ä¸ª ç®±å­ï¼‰
 
         for (int i = 0; i < (int)InventoryLocation.count; i++)
         {
-            InventoryLists[i] = new List<InventoryItem>(); //¸øÃ¿Ò»¸öInventoryList Ìî³ä ¾ßÌåµÄnew List<InventoryItem>()
+            InventoryLists[i] = new List<InventoryItem>(); //ç»™æ¯ä¸€ä¸ªInventoryList å¡«å…… å…·ä½“çš„new List<InventoryItem>()
         }
-        inventoryListCapacityIntArray = new int[(int)InventoryLocation.count];  //ÕâÀï¼ÇÂ¼Ã¿Ò»¸ö InventoryList µÄÈİÁ¿
+        inventoryListCapacityIntArray = new int[(int)InventoryLocation.count];  //è¿™é‡Œè®°å½•æ¯ä¸€ä¸ª InventoryList çš„å®¹é‡
 
-        //°Ñ´ú±íplayer µÄ InventoryList ÈİÁ¿ÉèÖÃÎª Settings ÖĞµÄ playerInitialInventoryCapacity 
+        //æŠŠä»£è¡¨player çš„ InventoryList å®¹é‡è®¾ç½®ä¸º Settings ä¸­çš„ playerInitialInventoryCapacity 
         inventoryListCapacityIntArray[(int)InventoryLocation.player] = Settings.playerInitialInventoryCapacity;
         
     }
 
-    private void CreatItemDetailsDictionary() //¸ù¾İSO_Item ÖĞµÃµ½µÄlist ½¨Á¢ ×Öµä£¬
+    private void CreatItemDetailsDictionary() //æ ¹æ®SO_Item ä¸­å¾—åˆ°çš„list å»ºç«‹ å­—å…¸ï¼Œ
     {
         itemDetailsDictionary = new Dictionary<int, ItemDetails>();
 
@@ -91,7 +91,7 @@ public class InventoryManager : SingletonMonobehaviour<InventoryManager> , ISave
 
     public void AddItem(InventoryLocation inventoryLocation, Item item , GameObject gameObjectToDelete)
     {
-        //ºÍÏÂÃæÄÇ¸ö²»Ò»ÑùµÄÊÇ£¬Õâ¸öº¯ÊıÊÇ°Ñ³¡¾°ÉÏµÄÎïÌåÌí¼Óµ½Inventory ÖĞ£¬²¢É¾³ı³¡¾°ÖĞµÄÎïÌå
+        //å’Œä¸‹é¢é‚£ä¸ªä¸ä¸€æ ·çš„æ˜¯ï¼Œè¿™ä¸ªå‡½æ•°æ˜¯æŠŠåœºæ™¯ä¸Šçš„ç‰©ä½“æ·»åŠ åˆ°Inventory ä¸­ï¼Œå¹¶åˆ é™¤åœºæ™¯ä¸­çš„ç‰©ä½“
         AddItem(inventoryLocation, item);
         Destroy(gameObjectToDelete);
 
@@ -100,22 +100,22 @@ public class InventoryManager : SingletonMonobehaviour<InventoryManager> , ISave
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="inventoryLocation">Òª·Å½øÄÄ¸ö¡°ÈİÆ÷¡±ÖĞ</param>
-        /// <param name="item">·ÅÈëµÄitem </param>
+        /// <param name="inventoryLocation">è¦æ”¾è¿›å“ªä¸ªâ€œå®¹å™¨â€ä¸­</param>
+        /// <param name="item">æ”¾å…¥çš„item </param>
     public void AddItem(InventoryLocation inventoryLocation, Item item)
     {
         int itemCode = item.ItemCode; 
-        List<InventoryItem> inventoryList = InventoryLists[(int) inventoryLocation ]; //´ÓInventoryListsÖĞµÃµ½ĞèÒª¼ÓÈëµÄÄÇ¸öinventoryList
+        List<InventoryItem> inventoryList = InventoryLists[(int) inventoryLocation ]; //ä»InventoryListsä¸­å¾—åˆ°éœ€è¦åŠ å…¥çš„é‚£ä¸ªinventoryList
 
-        int itemPosition = FindItemInInventory(inventoryLocation, itemCode); // ²é¿´Òª¼ÓÈëµÄÎïÌåÔÚ list ÖĞµÄÎ»ÖÃ
+        int itemPosition = FindItemInInventory(inventoryLocation, itemCode); // æŸ¥çœ‹è¦åŠ å…¥çš„ç‰©ä½“åœ¨ list ä¸­çš„ä½ç½®
 
-        if(itemPosition != -1) // Èç¹û²»Îª-1 ËµÃ÷µ±Ç°µÄlist ÖĞ ÓĞ ÎÒÃÇÒª¼ÓÈëµÄitem 
+        if(itemPosition != -1) // å¦‚æœä¸ä¸º-1 è¯´æ˜å½“å‰çš„list ä¸­ æœ‰ æˆ‘ä»¬è¦åŠ å…¥çš„item 
         {
             AddItemAtPosition(inventoryList, itemCode, itemPosition);
         }
         else
         {
-            AddItemAtPosition(inventoryList, itemCode); //Ã»ÓĞÎÒÃÇÒª¼ÓÈëµÄitem 
+            AddItemAtPosition(inventoryList, itemCode); //æ²¡æœ‰æˆ‘ä»¬è¦åŠ å…¥çš„item 
         }
 
         EventHandler.CallInventoryUpdatedEvent(inventoryLocation, InventoryLists[(int)inventoryLocation]);
@@ -156,10 +156,10 @@ public class InventoryManager : SingletonMonobehaviour<InventoryManager> , ISave
         }
         else
         {
-            Debug.Log("ÊıÁ¿"+ 
+            Debug.Log("æ•°é‡"+ 
                 _item.itemQuantity);
-            _item.itemQuantity = inventoryList[itemPosition].itemQuantity + 1; // ´ÓinventoryListÕÒµ½¶ÔÓ¦µÄitemµÄitemQuantity ¼ÓÒ»ºó¸³Öµ¸øº¯ÊıµÄ_item
-            inventoryList[itemPosition] = _item; // ÓÃ _item ¸üĞÂ inventoryList ÖĞµÄÄÚÈİ 
+            _item.itemQuantity = inventoryList[itemPosition].itemQuantity + 1; // ä»inventoryListæ‰¾åˆ°å¯¹åº”çš„itemçš„itemQuantity åŠ ä¸€åèµ‹å€¼ç»™å‡½æ•°çš„_item
+            inventoryList[itemPosition] = _item; // ç”¨ _item æ›´æ–° inventoryList ä¸­çš„å†…å®¹ 
 
         }
 
@@ -182,13 +182,13 @@ public class InventoryManager : SingletonMonobehaviour<InventoryManager> , ISave
         for(int i = 0; i < inventoryList.Count; i++)
         {
             if (inventoryList[i].itemCode == itemCode)
-                return i;  // Èç¹ûµ±Ç°list ÖĞÕÒµ½ÁËºÍÎÒÃÇÒª¼ÓÈëµÄ¶ÔÏóÏàÍ¬µÄitem ¾Í·µ»ØÕâ¸ölist ´æ·Å¸Ãitem µÄÎ»ÖÃ
+                return i;  // å¦‚æœå½“å‰list ä¸­æ‰¾åˆ°äº†å’Œæˆ‘ä»¬è¦åŠ å…¥çš„å¯¹è±¡ç›¸åŒçš„item å°±è¿”å›è¿™ä¸ªlist å­˜æ”¾è¯¥item çš„ä½ç½®
         }
         return -1;
 
     }
 
-    public ItemDetails GetiItemDetails(int itemCode) // Í¨¹ı×Öµä½¨Á¢µÄÖµ£¬µÃµ½ItemDetails
+    public ItemDetails GetiItemDetails(int itemCode) // é€šè¿‡å­—å…¸å»ºç«‹çš„å€¼ï¼Œå¾—åˆ°ItemDetails
     {
         ItemDetails itemDetails;
 
@@ -259,20 +259,20 @@ public class InventoryManager : SingletonMonobehaviour<InventoryManager> , ISave
 
     public GameObjectSave ISaveableSave()
     {
-        // ½¨Á¢Ò»¸öĞÂµÄ scene save 
+        // å»ºç«‹ä¸€ä¸ªæ–°çš„ scene save 
         SceneSave sceneSave = new SceneSave();
 
-        // É¾³ı³ıpersistent³¡¾°ÒÔÍâµÄËùÓĞ³¡¾°µÄ save Êı¾İ
+        // åˆ é™¤é™¤persistentåœºæ™¯ä»¥å¤–çš„æ‰€æœ‰åœºæ™¯çš„ save æ•°æ®
         GameObjectSave.sceneData.Remove(Settings.PersistentScene);
 
-        //Ìí¼Ó´æ»õÊı×é µ½ persistent³¡¾°µÄsaveÖĞ
+        //æ·»åŠ å­˜è´§æ•°ç»„ åˆ° persistentåœºæ™¯çš„saveä¸­
         sceneSave.listInvItemArray = InventoryLists;
 
-        //Ìí¼Ó ´æ»õÈİÆ÷Êı×é µ½ persistent³¡¾°µÄsaveÖĞ
+        //æ·»åŠ  å­˜è´§å®¹å™¨æ•°ç»„ åˆ° persistentåœºæ™¯çš„saveä¸­
         sceneSave.intArrayDictionary = new Dictionary<string, int[]>();
         sceneSave.intArrayDictionary.Add("inventoryListCapacityIntArray", inventoryListCapacityIntArray);
 
-        // ¸øÕâ¸öÓÎÏ·ÎïÌåÌí¼Ó³¡¾°save
+        // ç»™è¿™ä¸ªæ¸¸æˆç‰©ä½“æ·»åŠ åœºæ™¯save
         GameObjectSave.sceneData.Add(Settings.PersistentScene, sceneSave);
 
         return GameObjectSave;
@@ -285,7 +285,7 @@ public class InventoryManager : SingletonMonobehaviour<InventoryManager> , ISave
         {
             GameObjectSave = gameObjectSave;
 
-            // ĞèÒª²éÕÒ´æ»õÁĞ±í,ÊÔ×Å¶¨Î» Õâ¸öÓÎÏ·¶ÔÏóµÄ savescene 
+            // éœ€è¦æŸ¥æ‰¾å­˜è´§åˆ—è¡¨,è¯•ç€å®šä½ è¿™ä¸ªæ¸¸æˆå¯¹è±¡çš„ savescene 
             if (gameObjectSave.sceneData.TryGetValue(Settings.PersistentScene,out SceneSave sceneSave))
             {
                 if(sceneSave.listInvItemArray != null)
@@ -359,14 +359,14 @@ public class InventoryManager : SingletonMonobehaviour<InventoryManager> , ISave
     {
         if(from_slotNumber < InventoryLists[(int)inventoryLocation].Count && toSlotNumber < InventoryLists[(int)inventoryLocation].Count)
         {
-            //ÒªÇóÍÏ¶¯µÄÆğÊ¼Î»ÖÃºÍÄ¿±êÎ»ÖÃµÄË÷ÒıÖµĞ¡ÓÚ ¸ÃÎïÆ·À¸µÄÈİÁ¿
+            //è¦æ±‚æ‹–åŠ¨çš„èµ·å§‹ä½ç½®å’Œç›®æ ‡ä½ç½®çš„ç´¢å¼•å€¼å°äº è¯¥ç‰©å“æ çš„å®¹é‡
 
-            //Í¨¹ıÆğÊ¼Î»ÖÃºÍ½áÊøÎ»ÖÃ£¬ÕÒµ½Òª½»»»µÄÁ½¸öÎïÌå
+            //é€šè¿‡èµ·å§‹ä½ç½®å’Œç»“æŸä½ç½®ï¼Œæ‰¾åˆ°è¦äº¤æ¢çš„ä¸¤ä¸ªç‰©ä½“
 
             InventoryItem fromInventoryItem = InventoryLists[(int)inventoryLocation][from_slotNumber];
             InventoryItem toInventoryItem = InventoryLists[(int)inventoryLocation][toSlotNumber];
 
-            //½»»»
+            //äº¤æ¢
             InventoryLists[(int)inventoryLocation][from_slotNumber] = toInventoryItem;
             InventoryLists[(int)inventoryLocation][toSlotNumber] = fromInventoryItem;
 
@@ -378,12 +378,12 @@ public class InventoryManager : SingletonMonobehaviour<InventoryManager> , ISave
 
     public void SetSelectedInventoryItem(InventoryLocation inventoryLocation, int itemCode)
     {
-        selectedInventoryItem[(int)inventoryLocation ] = itemCode; //±íÊ¾µ±Ç°µÄlist £¨ plyaer »òÕßÊÇÏä×Ó £© Ñ¡ÖĞµÄÄ³Ò»¸öÎïÌå £¨ÓÃcode ±íÊ¾£©
+        selectedInventoryItem[(int)inventoryLocation ] = itemCode; //è¡¨ç¤ºå½“å‰çš„list ï¼ˆ plyaer æˆ–è€…æ˜¯ç®±å­ ï¼‰ é€‰ä¸­çš„æŸä¸€ä¸ªç‰©ä½“ ï¼ˆç”¨code è¡¨ç¤ºï¼‰
     }
 
     public void ClearSelectedInventoryItem(InventoryLocation inventoryLocation)
     {
-        selectedInventoryItem[(int)inventoryLocation] = -1; //±íÊ¾µ±Ç°list Ã»ÓĞÑ¡ÖĞÎïÌå
+        selectedInventoryItem[(int)inventoryLocation] = -1; //è¡¨ç¤ºå½“å‰list æ²¡æœ‰é€‰ä¸­ç‰©ä½“
     }
 
     private int GetSelectedInventoryItem(InventoryLocation inventoryLocation)
@@ -396,7 +396,7 @@ public class InventoryManager : SingletonMonobehaviour<InventoryManager> , ISave
         
         int itemcode = GetSelectedInventoryItem(inventoryLocation);
         //Debug.Log("itemcode::" + itemcode);
-        if (itemcode == -1) // Èç¹ûÊÇ¸ºÒ»¡£ËµÃ÷Ã»ÓĞÎïÌå±»Ñ¡ÖĞ
+        if (itemcode == -1) // å¦‚æœæ˜¯è´Ÿä¸€ã€‚è¯´æ˜æ²¡æœ‰ç‰©ä½“è¢«é€‰ä¸­
         {
             return null;
         }

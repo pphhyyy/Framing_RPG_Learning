@@ -5,7 +5,7 @@ using UnityEngine;
 public class Crop : MonoBehaviour
 {
 
-    private int harvestActionCount = 0; // ĞèÒª¶àÉÙ´Î ÊÕ»ñ¶¯×÷ ²ÅÄÜÊÕ»ñÕâ¸ö crop 
+    private int harvestActionCount = 0; // éœ€è¦å¤šå°‘æ¬¡ æ”¶è·åŠ¨ä½œ æ‰èƒ½æ”¶è·è¿™ä¸ª crop 
 
     [Tooltip("This should be populated from child transform gameobject showing harvest effect spawn point")]
     [SerializeField] private Transform harvestActionEffectTransform = null;
@@ -17,7 +17,7 @@ public class Crop : MonoBehaviour
 
     public void ProcessToolAction(ItemDetails equipitemDetails , bool isToolRight , bool isToolLeft, bool isToolDown, bool isToolUp )
     {
-        Debug.Log("µ÷ÓÃProcessToolAction");
+        Debug.Log("è°ƒç”¨ProcessToolAction");
         GridPropertyDetails gridPropertyDetails = GridPropertIesManager.Instance.GetGridPropertyDetails(cropGridPosition.x , cropGridPosition.y);
         if (gridPropertyDetails == null)
         {
@@ -52,7 +52,7 @@ public class Crop : MonoBehaviour
                 animator.SetTrigger("usetoolleft");
             }
         }
-        // ¸«Í·¹¤¾ß¿³Ê÷µÄÊ±ºò ³öÏÖµÄÂäÒ¶ÌØĞ§
+        // æ–§å¤´å·¥å…·ç æ ‘çš„æ—¶å€™ å‡ºç°çš„è½å¶ç‰¹æ•ˆ
         if (cropDetails.isHarvestActionEffect)
         {
             EventHandler.CallHarvestActionEffectEvent (harvestActionEffectTransform.position, cropDetails.harvestActionEffect);
@@ -104,8 +104,8 @@ public class Crop : MonoBehaviour
             GetComponentInChildren<SpriteRenderer>().enabled = false;
         }
 
-        ///ÕâÀïÊÇÎªÁË½â¾ö£¬ÓÃÊ®×Ö¸äÍÚÊ¯Í·ºó£¬³öÏÖµÄÊ¯Í·ÉÏ¸¡¶¯»­(±íÊ¾»ñµÃÁËÕâ¸öÊ¯Í·£©ÖĞ´øÓĞÅö×²Ìå£¬µ¼ÖÂÈç¹û½ÇÉ«ÍÚµÄÊ±ºò
-        ///Õ¾ÔÚÊ¯Í·ÉÏ·½¸ñ×Ó´¦£¬¾Í»á±»µ¯¿ª,ËùÒÔÔÚÕâÀïÉèÖÃÒ»ÏÂ£¬°Ñ³öÏÖµÄ¶¯»­ÉÏ¸¡µÄÎïÌåÉíÉÏµÄÅö×²ÌåÊ§È¥enable 
+        ///è¿™é‡Œæ˜¯ä¸ºäº†è§£å†³ï¼Œç”¨åå­—é•æŒ–çŸ³å¤´åï¼Œå‡ºç°çš„çŸ³å¤´ä¸Šæµ®åŠ¨ç”»(è¡¨ç¤ºè·å¾—äº†è¿™ä¸ªçŸ³å¤´ï¼‰ä¸­å¸¦æœ‰ç¢°æ’ä½“ï¼Œå¯¼è‡´å¦‚æœè§’è‰²æŒ–çš„æ—¶å€™
+        ///ç«™åœ¨çŸ³å¤´ä¸Šæ–¹æ ¼å­å¤„ï¼Œå°±ä¼šè¢«å¼¹å¼€,æ‰€ä»¥åœ¨è¿™é‡Œè®¾ç½®ä¸€ä¸‹ï¼ŒæŠŠå‡ºç°çš„åŠ¨ç”»ä¸Šæµ®çš„ç‰©ä½“èº«ä¸Šçš„ç¢°æ’ä½“å¤±å»enable 
         if (cropDetails.disableCropCollidersBeforeHarvestedAnimation )
         {
             Collider2D[] collider2Ds = GetComponentsInChildren<Collider2D>();    

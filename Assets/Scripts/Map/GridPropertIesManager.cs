@@ -13,13 +13,13 @@ public class GridPropertIesManager : SingletonMonobehaviour<GridPropertIesManage
 
     private Grid grid;
     
-    private bool isFirstTimeSceneLoaded = true; //ÊÇ·ñÊÇµÚÒ»´Î¼ÓÔØÕâ¸ö³¡¾°£¬Èç¹ûÊÇ£¬¾ÍÒªÓÃcrop µÄ³õÊ¼»¯¼ÓÔØÆ÷ instantiator 
-    //Îª³¡¾°ÖĞ ¸÷ÖÖ crop ÉèÖÃ ³õÊ¼µÄ ÊôĞÔ £¬±ÈÈç ÖÖÖ²¹ıÁË¶àÉÙÌì£¬Ö®ÀàµÄ£¬ÏÂÒ»´Î¼ÓÔØ¸Ã³¡¾°Ê±ºò¾Í²»ÄÜÊ¹ÓÃ³õÊ¼»¯ÁË£¬·ñÔòÖ®Ç°ÖÖÖ²µÄ½ø¶È¾ÍÇå¿ÕÁË
+    private bool isFirstTimeSceneLoaded = true; //æ˜¯å¦æ˜¯ç¬¬ä¸€æ¬¡åŠ è½½è¿™ä¸ªåœºæ™¯ï¼Œå¦‚æœæ˜¯ï¼Œå°±è¦ç”¨crop çš„åˆå§‹åŒ–åŠ è½½å™¨ instantiator 
+    //ä¸ºåœºæ™¯ä¸­ å„ç§ crop è®¾ç½® åˆå§‹çš„ å±æ€§ ï¼Œæ¯”å¦‚ ç§æ¤è¿‡äº†å¤šå°‘å¤©ï¼Œä¹‹ç±»çš„ï¼Œä¸‹ä¸€æ¬¡åŠ è½½è¯¥åœºæ™¯æ—¶å€™å°±ä¸èƒ½ä½¿ç”¨åˆå§‹åŒ–äº†ï¼Œå¦åˆ™ä¹‹å‰ç§æ¤çš„è¿›åº¦å°±æ¸…ç©ºäº†
     
     private Dictionary<string, GridPropertyDetails> gridPropertyDictionary;
 
     [SerializeField] private SO_CropDetailsList so_CropDetailsList = null;
-    [SerializeField] private SO_GridPropertise[]  so_gridPropertiesArry = null; // ´Óµ±Ç° ³¡¾°¶ÔÓ¦ µÄ so ÎÄ¼şÖĞ»ñÈ¡
+    [SerializeField] private SO_GridPropertise[]  so_gridPropertiesArry = null; // ä»å½“å‰ åœºæ™¯å¯¹åº” çš„ so æ–‡ä»¶ä¸­è·å–
     [SerializeField] private Tile[] dugGround = null;
     [SerializeField] private Tile[] waterGround = null;
 
@@ -37,7 +37,7 @@ public class GridPropertIesManager : SingletonMonobehaviour<GridPropertIesManage
 
     private void AdvanceDay(int gamerYear, Season gameSeason, int gameDay, string gameDayOfWeak, int gamerHour, int gameMinue, int gameSecond)
     {
-        //Ã¿¾­ÀúÒ»Ìì ĞèÒª´¦ÀíÒ»Ğ©¶«Î÷ £¨±ÈÈç½ñÌì¸øÍÁµØ½½µÄË®µÚ¶şÌìÓ¦¸Ã¸ÉÁË£¬Ò²¾ÍÊÇµÚ¶şÌì²»ÄÜÏÔÊ¾ ½½¹ıË®µÄÍÁµØ 
+        //æ¯ç»å†ä¸€å¤© éœ€è¦å¤„ç†ä¸€äº›ä¸œè¥¿ ï¼ˆæ¯”å¦‚ä»Šå¤©ç»™åœŸåœ°æµ‡çš„æ°´ç¬¬äºŒå¤©åº”è¯¥å¹²äº†ï¼Œä¹Ÿå°±æ˜¯ç¬¬äºŒå¤©ä¸èƒ½æ˜¾ç¤º æµ‡è¿‡æ°´çš„åœŸåœ° 
         ClearDisplayGridPropertyDetails();
 
         foreach (SO_GridPropertise so_GridProperties in so_gridPropertiesArry)
@@ -54,14 +54,14 @@ public class GridPropertIesManager : SingletonMonobehaviour<GridPropertIesManage
                         GridPropertyDetails gridPropertyDetails = item.Value;
 
 
-                        //¸üĞÂÈ«²¿ grid µÄÊôĞÔ ,growthDays ¼ÓÒ»Ìì 
+                        //æ›´æ–°å…¨éƒ¨ grid çš„å±æ€§ ,growthDays åŠ ä¸€å¤© 
                         if (gridPropertyDetails.growthDays > -1)
                         {
                             gridPropertyDetails.growthDays += 1;
                         }
 
 
-                        //¸üĞÂÈ«²¿ grid µÄÊôĞÔ À´·´Ó¦ ÕâÒ»Ìì ÒÑ¾­ ¹ıÈ¥ÁË 
+                        //æ›´æ–°å…¨éƒ¨ grid çš„å±æ€§ æ¥ååº” è¿™ä¸€å¤© å·²ç» è¿‡å»äº† 
                         if (gridPropertyDetails.daySinceWatered > -1)
                         {
                             gridPropertyDetails.daySinceWatered = -1;
@@ -103,7 +103,7 @@ public class GridPropertIesManager : SingletonMonobehaviour<GridPropertIesManage
     private void ClearDisplayGridPropertyDetails()
     {
         ClearDisplayGroundDecoration();
-        Debug.Log("Çå³ıËùÓĞ crop ");
+        Debug.Log("æ¸…é™¤æ‰€æœ‰ crop ");
         ClearDisplayAllPlantedCrops();
     }
 
@@ -115,7 +115,7 @@ public class GridPropertIesManager : SingletonMonobehaviour<GridPropertIesManage
 
     private void ClearDisplayAllPlantedCrops()
     {
-        //Çå³ı³¡¾°ÉÏËùÓĞ µÄ crop ¶ÔÏó
+        //æ¸…é™¤åœºæ™¯ä¸Šæ‰€æœ‰ çš„ crop å¯¹è±¡
         Crop[] cropArray;
         cropArray = FindObjectsOfType<Crop>();  
 
@@ -131,7 +131,7 @@ public class GridPropertIesManager : SingletonMonobehaviour<GridPropertIesManage
     {
         if(gridPropertyDetails.daysSinceDug > -1)
         {
-            ConnectDugGound(gridPropertyDetails); // ÒªÁ¬½Ó£¬ÊÇÒòÎª Ò»¸ö ·½¿é±»ÍÚµôÒÔºó ÒªºÍÖÜÎ§µÄ·½¿é²úÉúÁª¶¯ ¸Ä±äÖÜÎ§·½¿éÉÏÏÔÊ¾µÄ sprite 
+            ConnectDugGound(gridPropertyDetails); // è¦è¿æ¥ï¼Œæ˜¯å› ä¸º ä¸€ä¸ª æ–¹å—è¢«æŒ–æ‰ä»¥å è¦å’Œå‘¨å›´çš„æ–¹å—äº§ç”Ÿè”åŠ¨ æ”¹å˜å‘¨å›´æ–¹å—ä¸Šæ˜¾ç¤ºçš„ sprite 
         }
     }
 
@@ -139,13 +139,13 @@ public class GridPropertIesManager : SingletonMonobehaviour<GridPropertIesManage
     {
         if (gridPropertyDetails.daySinceWatered > -1)
         {
-            ConnectWaterGound(gridPropertyDetails); // ÒªÁ¬½Ó£¬ÊÇÒòÎª Ò»¸ö ·½¿é±»ÍÚµôÒÔºó ÒªºÍÖÜÎ§µÄ·½¿é²úÉúÁª¶¯ ¸Ä±äÖÜÎ§·½¿éÉÏÏÔÊ¾µÄ sprite 
+            ConnectWaterGound(gridPropertyDetails); // è¦è¿æ¥ï¼Œæ˜¯å› ä¸º ä¸€ä¸ª æ–¹å—è¢«æŒ–æ‰ä»¥å è¦å’Œå‘¨å›´çš„æ–¹å—äº§ç”Ÿè”åŠ¨ æ”¹å˜å‘¨å›´æ–¹å—ä¸Šæ˜¾ç¤ºçš„ sprite 
         }
     }
 
     public void DisplayPlantedCrops(GridPropertyDetails gridPropertyDetails)
     {
-        if(gridPropertyDetails.seedItemCode > -1)  // ´óÓÚ¸ºÒ» ËµÃ÷ gridPropertyDetails ÖĞ ´æÔÚÖÖ×Ó 
+        if(gridPropertyDetails.seedItemCode > -1)  // å¤§äºè´Ÿä¸€ è¯´æ˜ gridPropertyDetails ä¸­ å­˜åœ¨ç§å­ 
         {
             CropDetails cropDetails = so_CropDetailsList.GetCropDetails(gridPropertyDetails.seedItemCode);
 
@@ -156,7 +156,7 @@ public class GridPropertIesManager : SingletonMonobehaviour<GridPropertIesManage
                 int growthStages = cropDetails.growthDay.Length;
 
                 int currentGrowthStage = 0;
-                //Õâ¸öÑ­»·ÓÃÓÚ¼ÆËãµ±Ç°Éú³¤µÄ½×¶Î
+                //è¿™ä¸ªå¾ªç¯ç”¨äºè®¡ç®—å½“å‰ç”Ÿé•¿çš„é˜¶æ®µ
                 for(int i =  growthStages -1; i >= 0; i--)
                 {
                     if(gridPropertyDetails.growthDays >= cropDetails.growthDay[i])
@@ -166,7 +166,7 @@ public class GridPropertIesManager : SingletonMonobehaviour<GridPropertIesManage
                     }
                 }
 
-                //¸ù¾İÉÏÃæ¼ÆËãµÃµ½µÄµ±Ç°µÄÉú³¤½×¶Î ÉèÖÃ¶ÔÓ¦µÄprefabÖĞµÄÎ»ÖÃºÍsprite µÈ²ÎÊı 
+                //æ ¹æ®ä¸Šé¢è®¡ç®—å¾—åˆ°çš„å½“å‰çš„ç”Ÿé•¿é˜¶æ®µ è®¾ç½®å¯¹åº”çš„prefabä¸­çš„ä½ç½®å’Œsprite ç­‰å‚æ•° 
                 cropPrefab = cropDetails.growthPrefab[currentGrowthStage];
 
                 Sprite growthSprite = cropDetails.growthSprite[currentGrowthStage];
@@ -202,37 +202,37 @@ public class GridPropertIesManager : SingletonMonobehaviour<GridPropertIesManage
 
     private void ConnectWaterGound(GridPropertyDetails gridPropertyDetails)
     {
-        //´¦Àí µ±Ç° grid ÉÏµÄ tile 
-        Tile WaterTile0 = SetWaterTile(gridPropertyDetails.gridX, gridPropertyDetails.gridY); // »ñµÃ¶ÔÓ¦Î»ÖÃÉÏµÄ tile 
+        //å¤„ç† å½“å‰ grid ä¸Šçš„ tile 
+        Tile WaterTile0 = SetWaterTile(gridPropertyDetails.gridX, gridPropertyDetails.gridY); // è·å¾—å¯¹åº”ä½ç½®ä¸Šçš„ tile 
         groundDecoration2.SetTile(new Vector3Int(gridPropertyDetails.gridX, gridPropertyDetails.gridY, 0), WaterTile0);
 
 
-        //´¦Àí ¸½½ü ÉÏÏÂ×óÓÒ ËÄ¸ö grid ÉÏµÄ tiel 
-        GridPropertyDetails adjacentGridPropertyDetails; // ¸½½ü grid ÉÏµÄ PropertyDetails
+        //å¤„ç† é™„è¿‘ ä¸Šä¸‹å·¦å³ å››ä¸ª grid ä¸Šçš„ tiel 
+        GridPropertyDetails adjacentGridPropertyDetails; // é™„è¿‘ grid ä¸Šçš„ PropertyDetails
 
         adjacentGridPropertyDetails = GetGridPropertyDetails(gridPropertyDetails.gridX, gridPropertyDetails.gridY + 1);
-        if (adjacentGridPropertyDetails != null && adjacentGridPropertyDetails.daySinceWatered > -1) //ËµÃ÷Õâ¸ö adjacentGrid Ò²±»ÍÚ¹ıÁË
+        if (adjacentGridPropertyDetails != null && adjacentGridPropertyDetails.daySinceWatered > -1) //è¯´æ˜è¿™ä¸ª adjacentGrid ä¹Ÿè¢«æŒ–è¿‡äº†
         {
             Tile WaterTile1 = SetWaterTile(gridPropertyDetails.gridX, gridPropertyDetails.gridY + 1);
             groundDecoration2.SetTile(new Vector3Int(gridPropertyDetails.gridX, gridPropertyDetails.gridY + 1, 0), WaterTile1);
         }
 
         adjacentGridPropertyDetails = GetGridPropertyDetails(gridPropertyDetails.gridX, gridPropertyDetails.gridY - 1);
-        if (adjacentGridPropertyDetails != null && adjacentGridPropertyDetails.daySinceWatered > -1) //ËµÃ÷Õâ¸ö adjacentGrid Ò²±»ÍÚ¹ıÁË
+        if (adjacentGridPropertyDetails != null && adjacentGridPropertyDetails.daySinceWatered > -1) //è¯´æ˜è¿™ä¸ª adjacentGrid ä¹Ÿè¢«æŒ–è¿‡äº†
         {
             Tile WaterTile2 = SetWaterTile(gridPropertyDetails.gridX, gridPropertyDetails.gridY - 1);
             groundDecoration2.SetTile(new Vector3Int(gridPropertyDetails.gridX, gridPropertyDetails.gridY - 1, 0), WaterTile2);
         }
 
         adjacentGridPropertyDetails = GetGridPropertyDetails(gridPropertyDetails.gridX - 1, gridPropertyDetails.gridY);
-        if (adjacentGridPropertyDetails != null && adjacentGridPropertyDetails.daySinceWatered > -1) //ËµÃ÷Õâ¸ö adjacentGrid Ò²±»ÍÚ¹ıÁË
+        if (adjacentGridPropertyDetails != null && adjacentGridPropertyDetails.daySinceWatered > -1) //è¯´æ˜è¿™ä¸ª adjacentGrid ä¹Ÿè¢«æŒ–è¿‡äº†
         {
             Tile WaterTile3 = SetWaterTile(gridPropertyDetails.gridX - 1, gridPropertyDetails.gridY);
             groundDecoration2.SetTile(new Vector3Int(gridPropertyDetails.gridX - 1, gridPropertyDetails.gridY, 0), WaterTile3);
         }
 
         adjacentGridPropertyDetails = GetGridPropertyDetails(gridPropertyDetails.gridX + 1, gridPropertyDetails.gridY);
-        if (adjacentGridPropertyDetails != null && adjacentGridPropertyDetails.daySinceWatered > -1) //ËµÃ÷Õâ¸ö adjacentGrid Ò²±»ÍÚ¹ıÁË
+        if (adjacentGridPropertyDetails != null && adjacentGridPropertyDetails.daySinceWatered > -1) //è¯´æ˜è¿™ä¸ª adjacentGrid ä¹Ÿè¢«æŒ–è¿‡äº†
         {
             Tile WaterTile4 = SetWaterTile(gridPropertyDetails.gridX + 1, gridPropertyDetails.gridY);
             groundDecoration2.SetTile(new Vector3Int(gridPropertyDetails.gridX + 1, gridPropertyDetails.gridY, 0), WaterTile4);
@@ -243,37 +243,37 @@ public class GridPropertIesManager : SingletonMonobehaviour<GridPropertIesManage
 
     private void ConnectDugGound(GridPropertyDetails gridPropertyDetails)
     {
-        //´¦Àí µ±Ç° grid ÉÏµÄ tile 
-        Tile dugTile0 = SetDugTile(gridPropertyDetails.gridX, gridPropertyDetails.gridY); // »ñµÃ¶ÔÓ¦Î»ÖÃÉÏµÄ tile 
+        //å¤„ç† å½“å‰ grid ä¸Šçš„ tile 
+        Tile dugTile0 = SetDugTile(gridPropertyDetails.gridX, gridPropertyDetails.gridY); // è·å¾—å¯¹åº”ä½ç½®ä¸Šçš„ tile 
         groundDecoration1.SetTile(new Vector3Int(gridPropertyDetails.gridX , gridPropertyDetails.gridY , 0) , dugTile0 );
 
 
-        //´¦Àí ¸½½ü ÉÏÏÂ×óÓÒ ËÄ¸ö grid ÉÏµÄ tiel 
-        GridPropertyDetails adjacentGridPropertyDetails; // ¸½½ü grid ÉÏµÄ PropertyDetails
+        //å¤„ç† é™„è¿‘ ä¸Šä¸‹å·¦å³ å››ä¸ª grid ä¸Šçš„ tiel 
+        GridPropertyDetails adjacentGridPropertyDetails; // é™„è¿‘ grid ä¸Šçš„ PropertyDetails
 
         adjacentGridPropertyDetails = GetGridPropertyDetails(gridPropertyDetails.gridX, gridPropertyDetails.gridY + 1);
-        if(adjacentGridPropertyDetails != null && adjacentGridPropertyDetails.daysSinceDug > -1) //ËµÃ÷Õâ¸ö adjacentGrid Ò²±»ÍÚ¹ıÁË
+        if(adjacentGridPropertyDetails != null && adjacentGridPropertyDetails.daysSinceDug > -1) //è¯´æ˜è¿™ä¸ª adjacentGrid ä¹Ÿè¢«æŒ–è¿‡äº†
         {
             Tile dugTile1 = SetDugTile(gridPropertyDetails.gridX, gridPropertyDetails.gridY + 1);
             groundDecoration1.SetTile(new Vector3Int(gridPropertyDetails.gridX, gridPropertyDetails.gridY + 1, 0), dugTile1);
         }
 
         adjacentGridPropertyDetails = GetGridPropertyDetails(gridPropertyDetails.gridX, gridPropertyDetails.gridY - 1);
-        if (adjacentGridPropertyDetails != null && adjacentGridPropertyDetails.daysSinceDug > -1) //ËµÃ÷Õâ¸ö adjacentGrid Ò²±»ÍÚ¹ıÁË
+        if (adjacentGridPropertyDetails != null && adjacentGridPropertyDetails.daysSinceDug > -1) //è¯´æ˜è¿™ä¸ª adjacentGrid ä¹Ÿè¢«æŒ–è¿‡äº†
         {
             Tile dugTile2 = SetDugTile(gridPropertyDetails.gridX, gridPropertyDetails.gridY - 1);
             groundDecoration1.SetTile(new Vector3Int(gridPropertyDetails.gridX, gridPropertyDetails.gridY - 1, 0), dugTile2);
         }
 
         adjacentGridPropertyDetails = GetGridPropertyDetails(gridPropertyDetails.gridX - 1 , gridPropertyDetails.gridY);
-        if (adjacentGridPropertyDetails != null && adjacentGridPropertyDetails.daysSinceDug > -1) //ËµÃ÷Õâ¸ö adjacentGrid Ò²±»ÍÚ¹ıÁË
+        if (adjacentGridPropertyDetails != null && adjacentGridPropertyDetails.daysSinceDug > -1) //è¯´æ˜è¿™ä¸ª adjacentGrid ä¹Ÿè¢«æŒ–è¿‡äº†
         {
             Tile dugTile3 = SetDugTile(gridPropertyDetails.gridX - 1 , gridPropertyDetails.gridY);
             groundDecoration1.SetTile(new Vector3Int(gridPropertyDetails.gridX - 1 , gridPropertyDetails.gridY, 0), dugTile3);
         }
 
         adjacentGridPropertyDetails = GetGridPropertyDetails(gridPropertyDetails.gridX + 1, gridPropertyDetails.gridY);
-        if (adjacentGridPropertyDetails != null && adjacentGridPropertyDetails.daysSinceDug > -1) //ËµÃ÷Õâ¸ö adjacentGrid Ò²±»ÍÚ¹ıÁË
+        if (adjacentGridPropertyDetails != null && adjacentGridPropertyDetails.daysSinceDug > -1) //è¯´æ˜è¿™ä¸ª adjacentGrid ä¹Ÿè¢«æŒ–è¿‡äº†
         {
             Tile dugTile4 = SetDugTile(gridPropertyDetails.gridX + 1, gridPropertyDetails.gridY);
             groundDecoration1.SetTile(new Vector3Int(gridPropertyDetails.gridX + 1, gridPropertyDetails.gridY, 0), dugTile4);
@@ -282,14 +282,14 @@ public class GridPropertIesManager : SingletonMonobehaviour<GridPropertIesManage
 
     private Tile SetWaterTile(int gridX, int gridY)
     {
-        bool upDug = IsGridSquareWater(gridX, gridY + 1); // ¿´Õâ¸ö Î»ÖÃµÄ grid ÓĞÃ»ÓĞ ±» ÍÚ ¹ı 
+        bool upDug = IsGridSquareWater(gridX, gridY + 1); // çœ‹è¿™ä¸ª ä½ç½®çš„ grid æœ‰æ²¡æœ‰ è¢« æŒ– è¿‡ 
         bool downDug = IsGridSquareWater(gridX, gridY - 1);
         bool leftDug = IsGridSquareWater(gridX - 1, gridY);
         bool rightDug = IsGridSquareWater(gridX + 1, gridY);
 
         //print("upDug" + upDug.ToString() + "=== downDug" + downDug + "=== leftDug" + leftDug + "=== rightDug" + rightDug);
         print("upDug" +  upDug.ToString() + "=== downDug" + downDug + "=== leftDug" + leftDug + "=== rightDug" + rightDug);
-        #region ¸ù¾İÉÏÃæ²é¿´µÄ½á¹û ¶Ô ËÄÖÖbool ¶ÔÓ¦ Ê®ÁùÖÖ ¿ÉÄÜĞÔ
+        #region æ ¹æ®ä¸Šé¢æŸ¥çœ‹çš„ç»“æœ å¯¹ å››ç§bool å¯¹åº” åå…­ç§ å¯èƒ½æ€§
 
         if (!upDug && !downDug && !rightDug && !leftDug)
         {
@@ -367,14 +367,14 @@ public class GridPropertIesManager : SingletonMonobehaviour<GridPropertIesManage
 
     private Tile SetDugTile(int gridX, int gridY)
     {
-        bool upDug = IsGridSquareDug(gridX, gridY + 1); // ¿´Õâ¸ö Î»ÖÃµÄ grid ÓĞÃ»ÓĞ ±» ÍÚ ¹ı 
+        bool upDug = IsGridSquareDug(gridX, gridY + 1); // çœ‹è¿™ä¸ª ä½ç½®çš„ grid æœ‰æ²¡æœ‰ è¢« æŒ– è¿‡ 
         bool downDug = IsGridSquareDug(gridX, gridY - 1);
         bool leftDug = IsGridSquareDug(gridX-1, gridY);
         bool rightDug = IsGridSquareDug(gridX+1, gridY);
 
         //print("upDug" +  upDug.ToString() + "=== downDug" + downDug + "=== leftDug" + leftDug + "=== rightDug" + rightDug);
 
-        #region ¸ù¾İÉÏÃæ²é¿´µÄ½á¹û ¶Ô ËÄÖÖbool ¶ÔÓ¦ Ê®ÁùÖÖ ¿ÉÄÜĞÔ
+        #region æ ¹æ®ä¸Šé¢æŸ¥çœ‹çš„ç»“æœ å¯¹ å››ç§bool å¯¹åº” åå…­ç§ å¯èƒ½æ€§
 
         if (!upDug && !downDug && !rightDug && !leftDug)
         {
@@ -487,7 +487,7 @@ public class GridPropertIesManager : SingletonMonobehaviour<GridPropertIesManage
 
     
 
-    private void InitialiseGridProperties()  // ³õÊ¼»¯Íø¸ñÊôĞÔ
+    private void InitialiseGridProperties()  // åˆå§‹åŒ–ç½‘æ ¼å±æ€§
     {
         foreach(SO_GridPropertise so_GridPropterties in so_gridPropertiesArry)
         {
@@ -526,7 +526,7 @@ public class GridPropertIesManager : SingletonMonobehaviour<GridPropertIesManage
                 SetGridPropertyDetials(gridProperty.gridCoordinate.x, gridProperty.gridCoordinate.y, gridpropertyDetails, gridPropertyDictionary);
             }
 
-            //½«ÉÏÃæÅäÖÃµÄ¸÷ÖÖÊôĞÔ ¼ÓÔØµ½  sceneSave ÖĞ£¬·½±ãÓÎÏ·±£´æµ±Ç°µÄ½ø¶È 
+            //å°†ä¸Šé¢é…ç½®çš„å„ç§å±æ€§ åŠ è½½åˆ°  sceneSave ä¸­ï¼Œæ–¹ä¾¿æ¸¸æˆä¿å­˜å½“å‰çš„è¿›åº¦ 
             SceneSave sceneSave = new SceneSave();
 
             sceneSave.gridPropertyDetailsDictionary = gridPropertyDictionary;
@@ -536,10 +536,10 @@ public class GridPropertIesManager : SingletonMonobehaviour<GridPropertIesManage
                 this.gridPropertyDictionary = gridPropertyDictionary;
             }
 
-            // Ìí¼ÓÒ»¸öbool ×Öµä£¬²¢ÉèÖÃµ±Ç°³¡¾°µÄÃû×ÖÎª true£¬±íÊ¾Õâ¸ö³¡¾°ÒÑ¾­¼ÓÔØ¹ıµÄ 
+            // æ·»åŠ ä¸€ä¸ªbool å­—å…¸ï¼Œå¹¶è®¾ç½®å½“å‰åœºæ™¯çš„åå­—ä¸º trueï¼Œè¡¨ç¤ºè¿™ä¸ªåœºæ™¯å·²ç»åŠ è½½è¿‡çš„ 
             sceneSave.boolDictionary = new Dictionary<string, bool>();
             sceneSave.boolDictionary.Add("isFirstTimeSceneLoad", true);
-            //Ö®ºóÃ¿´Î ±£´æºÍ¼ÓÔØµÄÊ±ºò¶¼¿ÉÒÔ´ÓÕâÀï¿´µ½ µ±Ç°³¡¾°ÊÇ·ñÊÇµÚÒ»´Î¼ÓÔØ 
+            //ä¹‹åæ¯æ¬¡ ä¿å­˜å’ŒåŠ è½½çš„æ—¶å€™éƒ½å¯ä»¥ä»è¿™é‡Œçœ‹åˆ° å½“å‰åœºæ™¯æ˜¯å¦æ˜¯ç¬¬ä¸€æ¬¡åŠ è½½ 
 
             print("Debug2" + so_GridPropterties.sceneName);
             
@@ -587,13 +587,13 @@ public class GridPropertIesManager : SingletonMonobehaviour<GridPropertIesManage
 
     public Crop GetCropObjectAtGridLocation(GridPropertyDetails gridpropertyDetails)
     {
-        //grid ×ø±ê µ½ ÊÀ½ç×ø±êµÄ×ª»» 
+        //grid åæ ‡ åˆ° ä¸–ç•Œåæ ‡çš„è½¬æ¢ 
         Vector3 worldPosition = grid.GetCellCenterWorld(new Vector3Int(gridpropertyDetails.gridX, gridpropertyDetails.gridY, 0));
-        Collider2D[] collider2DArray = Physics2D.OverlapPointAll(worldPosition);//¸ù¾İ×ª»»µÃµ½µÄÊÀ½ç×ø±ê£¬ÕÒµ½¸Ã×ø±ê ¡°µã¡± ÉÏµÄ Collider2D Êı×é
+        Collider2D[] collider2DArray = Physics2D.OverlapPointAll(worldPosition);//æ ¹æ®è½¬æ¢å¾—åˆ°çš„ä¸–ç•Œåæ ‡ï¼Œæ‰¾åˆ°è¯¥åæ ‡ â€œç‚¹â€ ä¸Šçš„ Collider2D æ•°ç»„
 
         Crop crop = null;
 
-        for (int i = 0; i < collider2DArray.Length; i++) //±éÀú collider2DArray £¬´Ó¸¸¶ÔÏóºÍ×Ó¶ÔÏóÁ½¸ö·½ÏòÑ°ÕÒ¹ÒÔÚÁË Crop ×é¼şµÄ¶ÔÏó¡£È»ºó·µ»Ø¼´¿É
+        for (int i = 0; i < collider2DArray.Length; i++) //éå† collider2DArray ï¼Œä»çˆ¶å¯¹è±¡å’Œå­å¯¹è±¡ä¸¤ä¸ªæ–¹å‘å¯»æ‰¾æŒ‚åœ¨äº† Crop ç»„ä»¶çš„å¯¹è±¡ã€‚ç„¶åè¿”å›å³å¯
         {
             crop = collider2DArray[i].gameObject.GetComponentInParent<Crop>();
             if(crop != null && crop.cropGridPosition == new Vector2Int(gridpropertyDetails.gridX , gridpropertyDetails.gridY))
@@ -623,10 +623,10 @@ public class GridPropertIesManager : SingletonMonobehaviour<GridPropertIesManage
             cropParentTransform  = null;
         }    
 
-        // »ñÈ¡ grid
+        // è·å– grid
         grid = FindObjectOfType<Grid>();
 
-        // »ñÈ¡ tile map 
+        // è·å– tile map 
         groundDecoration1 = GameObject.FindGameObjectWithTag(Tags.GroundDecoration1).GetComponent<Tilemap>();
         groundDecoration2 = GameObject.FindGameObjectWithTag(Tags.GroundDecoration2).GetComponent<Tilemap>();
     }
@@ -661,17 +661,17 @@ public class GridPropertIesManager : SingletonMonobehaviour<GridPropertIesManage
     }
     public void ISaveable_RestoreScene(string sceneName)
     {
-        /* ´íÎóÈÕÖ¾
-        ÕâÀï´«ÈëµÄ²ÎÊı sceneName ÊÇÓÉ SaveLoadManager Í¨¹ı SceneManager.GetActiveScene().name µÃµ½µÄ£¬Ò²¾ÍÊÇ³¡¾°ÉÏ»î¶¯µÄ sceneName
-        ¶ø GameObjectSave.sceneData ÖĞ ×÷Îª key µÄ sceneName £¬ È´ÊÇÔÚ InitialiseGridProperties ÖĞ Í¨¹ı ÅäÖÃµÄ so_ ÎÄ¼şÖĞ enum SceneName »îµÃ
-        Ö®Ç°³öÏÖµÄ ÇĞ»»³¡¾°ºó ĞÂ³¡¾°ÖĞÕÒ²»µ½¿ÉÒÔ·ÅÖÃÎïÌåµÄ grid µÄbug £¬¾ÍÊÇ ÒòÎª ÔÚ enum SceneName ÖĞ SceneName Ê××ÖÄ¸´óĞ´£¬Óë Êµ¼ÊµÄ sceneName ²»Í¬ 
-        µ¼ÖÂ ÕâÀïµÄ TryGetValue ÎŞ·¨ÕÒµ½¶ÔÓ¦³¡¾°µÄ sceneSave £¬ÎŞ·¨ÔÚÇĞ»»³¡¾°Ê±£¬ »ñÈ¡ĞÂ³¡¾°ÖĞµÄ sceneSave.gridPropertyDetailsDictionary 
-         GetGridPropertyDetails ÖĞ gridPropertyDetailsDictionary.TryGetValue ¾ÍÎŞ·¨µÃµ½¶ÔÓ¦Íø¸ñÉÏµÄÍø¸ñÊÇ·ñÊÇ¿É·ÅÖÃµÄ£¨ÒòÎªÑ¹¸ùÃ»ÓĞÕâ¸ö¶«Î÷£©
+        /* é”™è¯¯æ—¥å¿—
+        è¿™é‡Œä¼ å…¥çš„å‚æ•° sceneName æ˜¯ç”± SaveLoadManager é€šè¿‡ SceneManager.GetActiveScene().name å¾—åˆ°çš„ï¼Œä¹Ÿå°±æ˜¯åœºæ™¯ä¸Šæ´»åŠ¨çš„ sceneName
+        è€Œ GameObjectSave.sceneData ä¸­ ä½œä¸º key çš„ sceneName ï¼Œ å´æ˜¯åœ¨ InitialiseGridProperties ä¸­ é€šè¿‡ é…ç½®çš„ so_ æ–‡ä»¶ä¸­ enum SceneName æ´»å¾—
+        ä¹‹å‰å‡ºç°çš„ åˆ‡æ¢åœºæ™¯å æ–°åœºæ™¯ä¸­æ‰¾ä¸åˆ°å¯ä»¥æ”¾ç½®ç‰©ä½“çš„ grid çš„bug ï¼Œå°±æ˜¯ å› ä¸º åœ¨ enum SceneName ä¸­ SceneName é¦–å­—æ¯å¤§å†™ï¼Œä¸ å®é™…çš„ sceneName ä¸åŒ 
+        å¯¼è‡´ è¿™é‡Œçš„ TryGetValue æ— æ³•æ‰¾åˆ°å¯¹åº”åœºæ™¯çš„ sceneSave ï¼Œæ— æ³•åœ¨åˆ‡æ¢åœºæ™¯æ—¶ï¼Œ è·å–æ–°åœºæ™¯ä¸­çš„ sceneSave.gridPropertyDetailsDictionary 
+         GetGridPropertyDetails ä¸­ gridPropertyDetailsDictionary.TryGetValue å°±æ— æ³•å¾—åˆ°å¯¹åº”ç½‘æ ¼ä¸Šçš„ç½‘æ ¼æ˜¯å¦æ˜¯å¯æ”¾ç½®çš„ï¼ˆå› ä¸ºå‹æ ¹æ²¡æœ‰è¿™ä¸ªä¸œè¥¿ï¼‰
 
-        µÚÒ»´Î½øÈëµÄ³¡¾°Ö®ËùÒÔÄÜÓÃ£¬ÊÇÒòÎª gridPropertyDetailsDictionary.TryGetValue Ö»ÊÇ²éÕÒ µ±Ç°³¡¾°µÄ gridPropertyDetailsDictionary
-        ¼´Ê¹ÏÖÔÚµÄ GameObjectSave.sceneData ÖĞ sceneName ºÍ ĞèÒªµÄ²»Ò»Ñù£¬Ò²²»Ó°ÏìµÚÒ»´Î×°ÈëµÄÄÚÈİ
+        ç¬¬ä¸€æ¬¡è¿›å…¥çš„åœºæ™¯ä¹‹æ‰€ä»¥èƒ½ç”¨ï¼Œæ˜¯å› ä¸º gridPropertyDetailsDictionary.TryGetValue åªæ˜¯æŸ¥æ‰¾ å½“å‰åœºæ™¯çš„ gridPropertyDetailsDictionary
+        å³ä½¿ç°åœ¨çš„ GameObjectSave.sceneData ä¸­ sceneName å’Œ éœ€è¦çš„ä¸ä¸€æ ·ï¼Œä¹Ÿä¸å½±å“ç¬¬ä¸€æ¬¡è£…å…¥çš„å†…å®¹
         */
-        //Debug.Log("ÊÇ·ñÊÇµÚÒ»´Î¼ÓÔØ" + sceneName);
+        //Debug.Log("æ˜¯å¦æ˜¯ç¬¬ä¸€æ¬¡åŠ è½½" + sceneName);
 
         if (GameObjectSave.sceneData.TryGetValue(sceneName, out SceneSave sceneSave))
         {
@@ -679,20 +679,20 @@ public class GridPropertIesManager : SingletonMonobehaviour<GridPropertIesManage
             {
                 gridPropertyDictionary = sceneSave.gridPropertyDetailsDictionary;
             }
-           // Debug.Log("ÊÇ·ñÊÇµÚÒ»´Î¼ÓÔØ");
-            //´Ó sceneSave µÄ boolDictionary ÖĞ ³¢ÊÔ»ñµÃ µ±Ç°³¡¾°ÊÇ·ñÊÇµÚÒ»´Î¼ÓÔØ£¬²¢ÓÃtry µÃµ½µÄÖµ ĞŞ¸Ä manager ÖĞ µÄ isFirstTimeSceneLoaded
+           // Debug.Log("æ˜¯å¦æ˜¯ç¬¬ä¸€æ¬¡åŠ è½½");
+            //ä» sceneSave çš„ boolDictionary ä¸­ å°è¯•è·å¾— å½“å‰åœºæ™¯æ˜¯å¦æ˜¯ç¬¬ä¸€æ¬¡åŠ è½½ï¼Œå¹¶ç”¨try å¾—åˆ°çš„å€¼ ä¿®æ”¹ manager ä¸­ çš„ isFirstTimeSceneLoaded
             if (sceneSave.boolDictionary != null && sceneSave.boolDictionary.TryGetValue("isFirstTimeSceneLoad",out bool storedIsFirstTimeSceneLoaded))
             {
-                //Debug.Log("µÚÒ»´Î¼ÓÔØ");
+                //Debug.Log("ç¬¬ä¸€æ¬¡åŠ è½½");
                 isFirstTimeSceneLoaded = storedIsFirstTimeSceneLoaded;
             }
 
-            if (isFirstTimeSceneLoaded) //Èç¹ûÊÇµÚÒ»´Î¼ÓÔØµ±Ç°³¡¾°£¬¾ÍÒªµ÷ÓÃeventhandler µÄ ·½·¨£¬À´³õÊ¼»¯ ¸÷ÖÖ crop µÄ prefab
-                EventHandler.CallInstantiateCropPrefabsEvent(); //Êµ¼Êµ÷ÓÃµÄÊÇ CropInstantiator ÖĞµÄ InstantiateCropPrefabs £¬
-                //³¡¾°ÉÏµÄ crop (¾ÍÊÇÄÇĞ©Ò»¿ªÊ¼¾Í´æÔÚµÄcrop Ê÷Ãç ÂÜ²·Ãç Ö®ÀàµÄ£¬¶¼»á¹ÒÔØÒ»¸ö CropInstantiator £¬ ²¢¶©ÔÄ CallInstantiateCropPrefabsEvent
-                //È»ºóÕâ±ßmanager Ö»Òª CallInstantiateCropPrefabsEvent £¬ ¾Í¿ÉÒÔÈÃ³¡¾°ÉÏµÄcrop ¶¼µ÷ÓÃËûÃÇ×Ô¼º¹ÒÔØµÄ CropInstantiator ÖĞ µÄ InstantiateCropPrefabs
+            if (isFirstTimeSceneLoaded) //å¦‚æœæ˜¯ç¬¬ä¸€æ¬¡åŠ è½½å½“å‰åœºæ™¯ï¼Œå°±è¦è°ƒç”¨eventhandler çš„ æ–¹æ³•ï¼Œæ¥åˆå§‹åŒ– å„ç§ crop çš„ prefab
+                EventHandler.CallInstantiateCropPrefabsEvent(); //å®é™…è°ƒç”¨çš„æ˜¯ CropInstantiator ä¸­çš„ InstantiateCropPrefabs ï¼Œ
+                //åœºæ™¯ä¸Šçš„ crop (å°±æ˜¯é‚£äº›ä¸€å¼€å§‹å°±å­˜åœ¨çš„crop æ ‘è‹— èåœè‹— ä¹‹ç±»çš„ï¼Œéƒ½ä¼šæŒ‚è½½ä¸€ä¸ª CropInstantiator ï¼Œ å¹¶è®¢é˜… CallInstantiateCropPrefabsEvent
+                //ç„¶åè¿™è¾¹manager åªè¦ CallInstantiateCropPrefabsEvent ï¼Œ å°±å¯ä»¥è®©åœºæ™¯ä¸Šçš„crop éƒ½è°ƒç”¨ä»–ä»¬è‡ªå·±æŒ‚è½½çš„ CropInstantiator ä¸­ çš„ InstantiateCropPrefabs
 
-            //Èç¹ûµ±Ç°³¡¾°´æÔÚ  gridPropertyDictionary £¬ÇåÀíÔ­À´µÄ  GridPropertyDetails £¬ DisplayGridPropertyDetails ÏÔÊ¾  GridPropertyDetails
+            //å¦‚æœå½“å‰åœºæ™¯å­˜åœ¨  gridPropertyDictionary ï¼Œæ¸…ç†åŸæ¥çš„  GridPropertyDetails ï¼Œ DisplayGridPropertyDetails æ˜¾ç¤º  GridPropertyDetails
             if (gridPropertyDictionary.Count > 0)
             {
                 ClearDisplayGridPropertyDetails();
@@ -702,7 +702,7 @@ public class GridPropertIesManager : SingletonMonobehaviour<GridPropertIesManage
 
             if (isFirstTimeSceneLoaded == true)
             { 
-                //Ö»Òª ³õÊ¼»¯Ò»´Î ºóÃæ¾Í²»Ó¦¸Ã³õÊ¼»¯ÁË 
+                //åªè¦ åˆå§‹åŒ–ä¸€æ¬¡ åé¢å°±ä¸åº”è¯¥åˆå§‹åŒ–äº† 
                 isFirstTimeSceneLoaded = false;
             }
         }
@@ -710,13 +710,13 @@ public class GridPropertIesManager : SingletonMonobehaviour<GridPropertIesManage
 
     public void ISaveable_StoreScene(string sceneName)
     {
-        //±£´æµ±Ç°³¡¾° µÄ grid ĞÅÏ¢ 
+        //ä¿å­˜å½“å‰åœºæ™¯ çš„ grid ä¿¡æ¯ 
         GameObjectSave.sceneData.Remove(sceneName);
         SceneSave sceneSave = new SceneSave();
 
         sceneSave.gridPropertyDetailsDictionary = gridPropertyDictionary;
         
-        //±£´æµÄÊ±ºòÒª°Ñµ±Ç°³¡¾°ÊÇ·ñÊÇµÚÒ»´Î¼ÓÔØµÄĞÅÏ¢±£´æ½øÈ¥ 
+        //ä¿å­˜çš„æ—¶å€™è¦æŠŠå½“å‰åœºæ™¯æ˜¯å¦æ˜¯ç¬¬ä¸€æ¬¡åŠ è½½çš„ä¿¡æ¯ä¿å­˜è¿›å» 
         sceneSave.boolDictionary = new Dictionary<string, bool>();
         sceneSave.boolDictionary.Add("isFirstTimeSceneLoad", isFirstTimeSceneLoaded);
        
