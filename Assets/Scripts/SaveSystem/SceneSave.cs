@@ -8,7 +8,7 @@ public class SceneSave
     public Dictionary<string, bool> boolDictionary; // 字符串的键， 用于标识我们是否选择了这个 list ，是否是第一次加载 
     //一个通过 string  来索引的  List<SceneItem> 的典， 每个list记录表示 一类 item 的 position ,
     //因为这里每个场景 只有 一个 so list 所以没有必要用 string 来索引 list 这里改成 list 就好
-    public List<SceneItem> listSceneItem; 
+    public List<SceneItem > listSceneItem; 
     public Dictionary<string, GridPropertyDetails> gridPropertyDetailsDictionary;
     
     public Dictionary<string, int[]> intArrayDictionary;

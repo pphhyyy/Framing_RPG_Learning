@@ -5,6 +5,7 @@ using UnityEngine;
 public class TimeManager : SingletonMonobehaviour<TimeManager>,ISaveable
 {
 
+    // git 更改测试 
     //定义各种时间参数
     private int gamerYear = 1;
     private Season gameSeason = Season.Spring;
@@ -28,7 +29,7 @@ public class TimeManager : SingletonMonobehaviour<TimeManager>,ISaveable
 
     protected override void Awake()
     {
-        base.Awake();
+        base.Awake();  
 
         ISaveableUniqueID = GetComponent<GenerateGUID>().GUID;
 
